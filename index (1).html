@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eks — Digital Products Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0a0c10;
+      --paper: #f4f2ee;
+      --accent: #1a56f0;
+      --accent2: #e8f0fe;
+      --muted: #6b7280;
+      --border: #e2ddd6;
+      --card: #ffffff;
+      --tag-bg: #f0f4ff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ─── HEADER / HERO ─── */
+    header {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 2rem clamp(1.5rem, 6vw, 6rem);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    /* diagonal accent stripe */
+    header::after {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 55%;
+      height: 130%;
+      background: linear-gradient(155deg, var(--accent2) 0%, transparent 70%);
+      border-left: 1px solid rgba(26,86,240,0.12);
+      transform: skewX(-6deg);
+      z-index: 0;
+    }
+
+    nav {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 2rem;
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo span {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 0 6px 2px;
+      margin-left: 1px;
+      border-radius: 3px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--ink); }
+
+    .hero {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.75rem;
+      max-width: 680px;
+      padding: 4rem 0 2rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent2);
+      border: 1px solid rgba(26,86,240,0.2);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      width: fit-content;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.1s forwards;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.25s forwards;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 520px;
+      font-weight: 300;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.4s forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.55s forwards;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(26,86,240,0.3);
+    }
+
+    .btn-primary:hover { box-shadow: 0 6px 24px rgba(26,86,240,0.4); }
+
+    .btn-ghost {
+      border: 1px solid var(--border);
+      color: var(--ink);
+      background: transparent;
+    }
+
+    .btn-ghost:hover { background: var(--card); }
+
+    .hero-scroll {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.7s forwards;
+    }
+
+    .scroll-line {
+      width: 40px; height: 1px;
+      background: var(--muted);
+    }
+
+    /* ─── TECH STACK TICKER ─── */
+    .ticker-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      background: var(--card);
+    }
+
+    .ticker {
+      display: flex;
+      gap: 3rem;
+      width: max-content;
+      animation: ticker 20s linear infinite;
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .ticker-dot {
+      width: 4px; height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTION COMMONS ─── */
+    section {
+      padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 6vw, 6rem);
+      position: relative;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    /* ─── APPS SECTION ─── */
+    #apps { background: var(--ink); color: var(--paper); }
+
+    #apps .section-label { color: #6b8fff; }
+
+    #apps .section-title { color: #fff; }
+
+    #apps .section-sub { color: rgba(255,255,255,0.5); }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .app-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s;
+      cursor: default;
+    }
+
+    .app-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(107,143,255,0.4);
+    }
+
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(107,143,255,0.6), transparent);
+    }
+
+    .app-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .app-icon.studyza { background: linear-gradient(135deg, #FFB800, #FFD166); }
+    .app-icon.studyai { background: linear-gradient(135deg, #1A1A2E, #1A1A2E); }
+
+    .app-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+      color: #fff;
+    }
+
+    .app-card p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .app-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      border: 1px solid rgba(107,143,255,0.25);
+      color: rgba(255,255,255,0.5);
+    }
+
+    .app-number {
+      position: absolute;
+      top: 2rem; right: 2rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 4rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    /* ─── ABOUT SECTION ─── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      #about { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .about-card-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat-box {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .stat-box .num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-box .label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      font-weight: 400;
+    }
+
+    .stack-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .stack-pill {
+      background: var(--tag-bg);
+      color: var(--accent);
+      border: 1px solid rgba(26,86,240,0.15);
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.3rem 0.85rem;
+    }
+
+    /* ─── CONTACT SECTION ─── */
+    #contact {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: border-color 0.2s, transform 0.18s, box-shadow 0.18s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+      box-shadow: -3px 0 0 var(--accent);
+    }
+
+    .contact-icon {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      background: var(--accent2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    .contact-link-text strong {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .contact-link-text span {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 2rem clamp(1.5rem, 6vw, 6rem);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── RESPONSIVE NAV ─── */
+    @media (max-width: 600px) {
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <nav>
+    <a href="#" class="logo"><img src="images\logo.png" width="80"></a>
+    <ul>
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-badge">Digital Products Studio</div>
+    <h1>Building<br/><em>tomorrow's</em><br/>products.</h1>
+    <p>We design and engineer AI-powered applications, service platforms, and automation systems that solve real business problems fast, scalable, and built to last.</p>
+    <div class="hero-cta">
+      <a href="#apps" class="btn btn-primary">View Our Apps ↓</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="scroll-line"></span>
+    Scroll to explore
+  </div>
+</header>
+
+<!-- ── TICKER ── -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <!-- repeated twice for seamless loop -->
+    <span class="ticker-item"><span class="ticker-dot"></span> Flutter</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Angular</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Firebase</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> AI Integration</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Google Play</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Scalable Systems</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Automation</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Mobile & Web</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Flutter</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Angular</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Firebase</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> AI Integration</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Google Play</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Scalable Systems</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Automation</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Mobile & Web</span>
+  </div>
+</div>
+
+<!-- ── APPS ── -->
+<section id="apps">
+  <div class="reveal">
+    <p class="section-label">Our Products</p>
+    <h2 class="section-title">Apps on<br/>Google Play</h2>
+    <p class="section-sub">Two education-focused tools built with Flutter and Firebase, powered by AI.</p>
+  </div>
+
+  <div class="apps-grid">
+    <div class="app-card reveal">
+      <span class="app-number">01</span>
+      <div class="app-icon studyza"><img src="images\highstudy.png", width="40"></div>
+      <h3>High Study</h3>
+      <p>A smart study companion designed for South African students. Organised resources, progress tracking, and an intuitive learning experience — all in one place.</p>
+      <div class="app-tags">
+        <span class="tag">Flutter</span>
+        <span class="tag">Firebase</span>
+        <span class="tag">Education</span>
+        <span class="tag">South Africa</span>
+      </div>
+    </div>
+
+    <div class="app-card reveal">
+      <span class="app-number">02</span>
+      <div class="app-icon studyai"><img src="images\studysphere.png", width="40"></div>
+      <h3>Study Sphere</h3>
+      <p>An AI-powered study assistant that helps students understand complex topics, generate practice questions, and get instant explanations — whenever they need it.</p>
+      <div class="app-tags">
+        <span class="tag">Flutter</span>
+        <span class="tag">AI</span>
+        <span class="tag">Firebase</span>
+        <span class="tag">EdTech</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label">Who We Are</p>
+    <h2 class="section-title">Technology-driven<br/>from day one.</h2>
+    <p class="section-sub" style="margin-bottom:2rem;">Eks is a technology-driven development team passionate about turning ideas into scalable digital products. We work with Flutter, Angular, and Firebase to create AI-powered applications, service platforms, and automation systems that solve real business problems.</p>
+    <a href="#contact" class="btn btn-primary">Work With Us</a>
+  </div>
+
+  <div class="about-visual reveal">
+    <div class="about-card">
+      <div class="about-card-inner">
+        <div class="stat-row">
+          <div class="stat-box">
+            <div class="num">2</div>
+            <div class="label">Apps Published</div>
+          </div>
+          <div class="stat-box">
+            <div class="num">3+</div>
+            <div class="label">Core Technologies</div>
+          </div>
+        </div>
+        <div>
+          <p class="section-label" style="margin-bottom:0.75rem;">Tech Stack</p>
+          <div class="stack-row">
+            <span class="stack-pill">Flutter</span>
+            <span class="stack-pill">Angular</span>
+            <span class="stack-pill">Firebase</span>
+            <span class="stack-pill">Dart</span>
+            <span class="stack-pill">TypeScript</span>
+            <span class="stack-pill">AI / LLMs</span>
+            <span class="stack-pill">REST APIs</span>
+          </div>
+        </div>
+        <div>
+          <p class="section-label" style="margin-bottom:0.75rem;">Focus Areas</p>
+          <div class="stack-row">
+            <span class="stack-pill">Education Tech</span>
+            <span class="stack-pill">Automation</span>
+            <span class="stack-pill">Service Platforms</span>
+            <span class="stack-pill">Mobile Apps</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title">Let's build<br/>something great.</h2>
+      <p class="section-sub">Have a project in mind or want to collaborate? We'd love to hear from you.</p>
+    </div>
+
+    <div class="contact-links reveal">
+      <a href="mailto:ekspeace@gmail.com" class="contact-link">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        </div>
+        <div class="contact-link-text">
+          <strong>Email Us</strong>
+          <span>ekspeace@gmail.com</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/Ekspeace" target="_blank" rel="noopener" class="contact-link">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </div>
+        <div class="contact-link-text">
+          <strong>GitHub</strong>
+          <span>github.com/Ekspeace</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2026 <strong>Eks</strong>. All rights reserved.</p>
+  <p>Built with Flutter · Angular · Firebase</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = (i * 0.08) + 's';
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
