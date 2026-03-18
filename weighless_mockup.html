@@ -1,0 +1,2394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weighless — App Screens Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #4CAF82;
+    --green-light: #7DD4A8;
+    --green-dark: #2E8B5A;
+    --green-surface: #EAF7F0;
+    --teal: #2ABFBF;
+    --teal-surface: #E6F9F9;
+    --amber: #FFB347;
+    --amber-surface: #FFF3E0;
+    --bg: #F8FAF9;
+    --surface: #FFFFFF;
+    --surface-2: #F2F5F3;
+    --border: #E0E8E3;
+    --text-1: #1A2E25;
+    --text-2: #5A7065;
+    --text-3: #9DB5A8;
+    --error: #E57373;
+    --info: #64B5F6;
+    --shadow: 0 32px 80px rgba(76,175,130,0.18), 0 8px 24px rgba(0,0,0,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #0D1F17;
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─────────────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 30%, rgba(76,175,130,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 80% 70%, rgba(42,191,191,0.2) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 50% 10%, rgba(255,179,71,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(76,175,130,0.15);
+    border: 1px solid rgba(76,175,130,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green-light);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-badge::before { content: '🌿'; font-size: 14px; }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.9s ease 0.1s both;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.55);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    animation: fadeUp 1s ease 0.2s both;
+    font-weight: 500;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 1.1s ease 0.3s both;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat .num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-stat .lbl {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 2px;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(76,175,130,0.6), transparent);
+  }
+
+  /* ─── NAV ───────────────────────────────────────────────────────── */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,31,23,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(76,175,130,0.12);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-bar::-webkit-scrollbar { display: none; }
+
+  .nav-item {
+    flex-shrink: 0;
+    padding: 16px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.35);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+
+  .nav-item:hover { color: rgba(255,255,255,0.7); }
+  .nav-item.active {
+    color: var(--green-light);
+    border-bottom-color: var(--green);
+  }
+
+  /* ─── SECTIONS ──────────────────────────────────────────────────── */
+  .section {
+    padding: 80px 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+
+  .section-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    font-family: 'Syne', sans-serif;
+    flex-shrink: 0;
+  }
+
+  .section-title-wrap h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+  }
+
+  .section-title-wrap p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* ─── DIVIDER ───────────────────────────────────────────────────── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(76,175,130,0.15), transparent);
+    margin: 0 24px;
+  }
+
+  /* ─── PHONE FRAME ───────────────────────────────────────────────── */
+  .phone-showcase {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .phone-showcase.centered {
+    justify-content: center;
+  }
+
+  .phone-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .phone-frame {
+    width: 280px;
+    height: 580px;
+    background: #0a0a0a;
+    border-radius: 44px;
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.5),
+      0 40px 80px rgba(0,0,0,0.5),
+      0 0 0 6px #111,
+      0 0 0 8px rgba(255,255,255,0.04),
+      inset 0 2px 4px rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .phone-frame:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.5),
+      0 60px 100px rgba(0,0,0,0.6),
+      0 0 0 6px #111,
+      0 0 0 8px rgba(255,255,255,0.04),
+      0 0 60px rgba(76,175,130,0.15),
+      inset 0 2px 4px rgba(255,255,255,0.06);
+  }
+
+  /* Notch */
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 26px;
+    background: #0a0a0a;
+    border-radius: 0 0 18px 18px;
+    z-index: 50;
+  }
+
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 42px;
+    overflow: hidden;
+    background: var(--bg);
+    position: relative;
+  }
+
+  .phone-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    letter-spacing: 0.3px;
+  }
+
+  .phone-sublabel {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.25);
+    text-align: center;
+    margin-top: 2px;
+  }
+
+  /* ─── SCREEN CONTENT STYLES ─────────────────────────────────────── */
+
+  /* Status bar */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 20px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-1);
+    flex-shrink: 0;
+  }
+
+  .status-icons { display: flex; gap: 4px; align-items: center; }
+
+  /* Common screen layout */
+  .screen {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  .screen-scroll {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .screen-scroll::-webkit-scrollbar { display: none; }
+
+  /* Gradients */
+  .grad-header {
+    background: linear-gradient(160deg, #EAF7F0 0%, #F0FDF8 100%);
+  }
+
+  /* ─── SPLASH ────────────────────────────────────────────────── */
+  .splash-screen {
+    background: linear-gradient(160deg, #EAF7F0 0%, #F8FAF9 60%, #E6F9F9 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 16px;
+  }
+
+  .splash-logo-mark {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 900;
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    box-shadow: 0 12px 32px rgba(76,175,130,0.35);
+  }
+
+  .splash-name {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text-1);
+    letter-spacing: -0.5px;
+  }
+
+  .splash-tag {
+    font-size: 12px;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  .splash-loader {
+    width: 36px;
+    height: 36px;
+    border: 3px solid rgba(76,175,130,0.2);
+    border-top-color: var(--green);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-top: 24px;
+  }
+
+  /* ─── LOGIN ──────────────────────────────────────────────────── */
+  .login-screen {
+    background: linear-gradient(160deg, #EAF7F0 0%, #F8FAF9 100%);
+    padding: 32px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .login-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 28px;
+    margin-top: 16px;
+  }
+
+  .login-logo-sm {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+    color: #fff;
+  }
+
+  .login-logo-text { font-size: 18px; font-weight: 800; color: var(--text-1); }
+
+  .screen-h1 { font-size: 22px; font-weight: 800; color: var(--text-1); margin-bottom: 4px; }
+  .screen-h1-sub { font-size: 12px; color: var(--text-2); font-weight: 500; margin-bottom: 20px; }
+
+  .input-field {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--text-1);
+    margin-bottom: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .input-field .icon { color: var(--text-3); font-size: 14px; }
+  .input-field .placeholder { color: var(--text-3); font-weight: 500; }
+  .input-field.focused { border-color: var(--green); background: #fff; }
+
+  .btn-grad {
+    background: linear-gradient(90deg, var(--green), var(--teal));
+    color: #fff;
+    border-radius: 14px;
+    padding: 12px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(76,175,130,0.35);
+    margin-bottom: 12px;
+  }
+
+  .divider-or {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+    font-size: 11px;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+
+  .divider-or::before, .divider-or::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .btn-outline {
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 11px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-2);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .register-link {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+
+  .register-link span { color: var(--green); font-weight: 700; }
+
+  /* ─── ONBOARDING ─────────────────────────────────────────────── */
+  .onboarding-screen {
+    background: linear-gradient(160deg, #EAF7F0, #F8FAF9, #E6F9F9);
+    padding: 16px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .ob-dots {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin: 8px 0 24px;
+  }
+
+  .ob-dot {
+    height: 7px;
+    border-radius: 4px;
+    background: var(--border);
+    transition: all 0.3s;
+  }
+
+  .ob-dot.active { background: var(--green); width: 22px; }
+  .ob-dot:not(.active) { width: 7px; }
+
+  .ob-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 20px rgba(76,175,130,0.3);
+  }
+
+  .feature-pill {
+    background: var(--green-surface);
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-1);
+    margin-bottom: 8px;
+  }
+
+  .feature-pill .pill-icon { font-size: 16px; }
+
+  /* ─── HOME ───────────────────────────────────────────────────── */
+  .home-screen { background: var(--bg); height: 100%; overflow-y: auto; scrollbar-width: none; }
+  .home-screen::-webkit-scrollbar { display: none; }
+
+  .home-header {
+    background: linear-gradient(160deg, #EAF7F0, #F0FDF8);
+    padding: 28px 18px 18px;
+  }
+
+  .home-greet-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+  }
+
+  .greeting-sm { font-size: 11px; color: var(--text-2); font-weight: 500; }
+  .name-lg { font-size: 20px; font-weight: 800; color: var(--text-1); }
+
+  .avatar-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .date-sm { font-size: 10px; color: var(--text-3); font-weight: 500; margin-top: 4px; }
+
+  .home-body { padding: 14px 14px 80px; }
+
+  .stats-row { display: flex; gap: 10px; margin-bottom: 12px; }
+
+  .stat-card {
+    flex: 1;
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 12px;
+    border: 1px solid var(--border);
+  }
+
+  .stat-card-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .stat-val { font-size: 16px; font-weight: 800; color: var(--text-1); }
+  .stat-lbl { font-size: 9px; color: var(--text-2); font-weight: 500; margin-top: 1px; }
+
+  .motivation-card {
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    border-radius: 18px;
+    padding: 14px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    box-shadow: 0 8px 24px rgba(76,175,130,0.3);
+  }
+
+  .moti-emoji { font-size: 24px; flex-shrink: 0; }
+
+  .moti-by { font-size: 9px; color: rgba(255,255,255,0.65); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+  .moti-text { font-size: 11.5px; color: #fff; font-weight: 600; line-height: 1.5; margin-top: 3px; }
+
+  .cta-card {
+    border-radius: 16px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    border: 1px solid;
+  }
+
+  .cta-card-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .cta-title { font-size: 13px; font-weight: 700; color: var(--text-1); }
+  .cta-sub { font-size: 10px; color: var(--text-2); font-weight: 500; margin-top: 1px; }
+
+  .section-head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 14px;
+  }
+
+  .section-head { font-size: 14px; font-weight: 700; color: var(--text-1); }
+  .section-action { font-size: 11px; color: var(--green); font-weight: 700; }
+
+  .meal-row-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+  }
+
+  .meal-emoji-box {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .meal-title { font-size: 12px; font-weight: 700; color: var(--text-1); }
+  .meal-cat { font-size: 10px; font-weight: 600; margin-top: 1px; }
+  .meal-cal { font-size: 10px; color: var(--text-3); font-weight: 600; margin-left: auto; }
+
+  /* ─── BOTTOM NAV ─────────────────────────────────────────────── */
+  .bottom-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 1px solid var(--border);
+    display: flex;
+    padding: 6px 0 14px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.04);
+  }
+
+  .nav-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text-3);
+  }
+
+  .nav-tab.active { color: var(--green); }
+  .nav-tab-icon { font-size: 20px; }
+  .nav-active-dot { width: 20px; height: 3px; background: var(--green); border-radius: 2px; margin-bottom: 2px; }
+
+  /* ─── CHECKIN ────────────────────────────────────────────────── */
+  .checkin-screen { background: var(--bg); height: 100%; overflow-y: auto; scrollbar-width: none; }
+  .checkin-screen::-webkit-scrollbar { display: none; }
+
+  .checkin-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 18px 12px;
+    background: var(--bg);
+  }
+
+  .back-btn { font-size: 16px; color: var(--text-1); }
+  .topbar-title { font-size: 16px; font-weight: 800; color: var(--text-1); }
+
+  .checkin-body { padding: 4px 14px 24px; }
+
+  .info-banner {
+    background: linear-gradient(135deg, var(--green-surface), var(--teal-surface));
+    border-radius: 16px;
+    padding: 14px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+    align-items: center;
+  }
+
+  .section-label-sm {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-1);
+    margin-bottom: 8px;
+  }
+
+  .weight-input-box {
+    background: #fff;
+    border: 1.5px solid var(--green);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+
+  .weight-num { font-size: 22px; font-weight: 800; color: var(--text-1); }
+  .weight-unit { font-size: 13px; color: var(--text-2); font-weight: 600; }
+
+  .adherence-row { display: flex; gap: 8px; margin-bottom: 18px; }
+
+  .adh-btn {
+    flex: 1;
+    border-radius: 12px;
+    padding: 11px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1.5px solid;
+  }
+
+  .adh-yes { background: var(--green-surface); border-color: var(--green); color: var(--green); }
+  .adh-no { background: #fff; border-color: var(--border); color: var(--text-2); }
+
+  .mood-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+
+  .mood-chip {
+    background: var(--green-surface);
+    border: 1.5px solid var(--green);
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  .mood-chip.unsel { background: #fff; border-color: var(--border); color: var(--text-2); }
+
+  /* ─── AI CHAT ─────────────────────────────────────────────────── */
+  .chat-screen { background: #F0F4F3; height: 100%; display: flex; flex-direction: column; }
+
+  .chat-topbar {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 28px 14px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .chat-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .chat-name { font-size: 14px; font-weight: 700; color: var(--text-1); }
+  .chat-online { font-size: 10px; color: var(--green); font-weight: 600; display: flex; align-items: center; gap: 3px; }
+  .online-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; }
+
+  .chat-messages { flex: 1; padding: 12px; overflow-y: auto; scrollbar-width: none; display: flex; flex-direction: column; gap: 6px; }
+
+  .msg-bubble {
+    max-width: 78%;
+    padding: 10px 13px;
+    border-radius: 16px;
+    font-size: 12px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .msg-bot {
+    background: #fff;
+    color: var(--text-1);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .msg-user {
+    background: var(--green);
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+
+  .msg-row { display: flex; align-items: flex-end; gap: 6px; }
+  .msg-row.user { flex-direction: row-reverse; }
+
+  .bot-avatar-sm {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .typing-dots {
+    display: flex;
+    gap: 3px;
+    padding: 8px 10px;
+    background: #fff;
+    border-radius: 14px;
+    border-bottom-left-radius: 4px;
+    align-self: flex-start;
+    margin-left: 32px;
+  }
+
+  .typing-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--text-3);
+    border-radius: 50%;
+    animation: typingBounce 1.2s ease-in-out infinite;
+  }
+
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  .chat-input-bar {
+    background: #fff;
+    padding: 8px 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .chat-input-field {
+    flex: 1;
+    background: #F2F5F3;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 9px 14px;
+    font-size: 12px;
+    color: var(--text-3);
+    font-family: 'Nunito', sans-serif;
+  }
+
+  .send-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(76,175,130,0.35);
+    flex-shrink: 0;
+  }
+
+  /* ─── MEALS ───────────────────────────────────────────────────── */
+  .meals-screen { background: var(--bg); height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+
+  .meals-tabs {
+    display: flex;
+    gap: 0;
+    padding: 8px 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .meal-tab {
+    flex-shrink: 0;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-2);
+    margin-right: 4px;
+    white-space: nowrap;
+  }
+
+  .meal-tab.active {
+    background: linear-gradient(90deg, var(--green), var(--teal));
+    color: #fff;
+  }
+
+  .meals-list { flex: 1; overflow-y: auto; padding: 12px; scrollbar-width: none; }
+
+  .meal-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+
+  .meal-card-img {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    position: relative;
+  }
+
+  .meal-cal-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 12px;
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .meal-card-body { padding: 12px; }
+  .meal-card-title { font-size: 13px; font-weight: 700; color: var(--text-1); margin-bottom: 4px; }
+  .meal-card-desc { font-size: 10px; color: var(--text-2); line-height: 1.5; margin-bottom: 8px; }
+
+  .tag-row { display: flex; gap: 4px; flex-wrap: wrap; }
+
+  .tag {
+    padding: 3px 7px;
+    border-radius: 7px;
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  /* ─── PROGRESS ────────────────────────────────────────────────── */
+  .progress-screen { background: var(--bg); height: 100%; overflow-y: auto; scrollbar-width: none; }
+  .progress-screen::-webkit-scrollbar { display: none; }
+
+  .progress-body { padding: 10px 14px 80px; }
+
+  .goal-bar-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+
+  .goal-bar-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .goal-bar-title { font-size: 12px; font-weight: 700; color: var(--text-1); display: flex; align-items: center; gap: 6px; }
+  .goal-bar-sub { font-size: 10px; color: var(--text-2); font-weight: 600; }
+
+  .progress-bar-bg {
+    height: 10px;
+    background: var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--teal));
+    border-radius: 5px;
+  }
+
+  .goal-bar-labels { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-3); font-weight: 600; }
+
+  /* Chart */
+  .chart-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+
+  .chart-area {
+    height: 120px;
+    position: relative;
+    margin-top: 10px;
+  }
+
+  .chart-svg { width: 100%; height: 100%; }
+
+  .checkin-hist-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+  }
+
+  .date-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--green-surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .date-num { font-size: 14px; font-weight: 800; color: var(--green); line-height: 1; }
+  .date-mon { font-size: 8px; font-weight: 700; color: var(--green); }
+
+  .checkin-weight { font-size: 13px; font-weight: 700; color: var(--text-1); }
+  .checkin-mood { font-size: 10px; color: var(--text-2); margin-top: 1px; }
+
+  .plan-badge {
+    margin-left: auto;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .plan-yes { background: var(--green-surface); color: var(--green); }
+  .plan-no { background: rgba(229,115,115,0.1); color: var(--error); }
+
+  /* ─── COMMUNITY ───────────────────────────────────────────────── */
+  .community-screen { background: #F0F4F3; height: 100%; display: flex; flex-direction: column; }
+
+  .community-topbar {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 28px 14px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .community-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .live-badge {
+    margin-left: auto;
+    background: var(--green-surface);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .comm-guideline {
+    margin: 8px 10px;
+    background: var(--green-surface);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 10px;
+    color: var(--text-2);
+    font-weight: 500;
+    border: 1px solid rgba(76,175,130,0.2);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .comm-messages { flex: 1; padding: 8px 10px; overflow-y: auto; scrollbar-width: none; display: flex; flex-direction: column; gap: 4px; }
+
+  .comm-msg-row { display: flex; align-items: flex-end; gap: 5px; }
+  .comm-msg-row.me { flex-direction: row-reverse; }
+
+  .comm-avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .comm-bubble {
+    max-width: 72%;
+    padding: 8px 11px;
+    border-radius: 14px;
+    font-size: 11px;
+    line-height: 1.45;
+    font-weight: 500;
+  }
+
+  .comm-bubble.bot { background: #fff; color: var(--text-1); border-bottom-left-radius: 3px; }
+  .comm-bubble.me { background: var(--green); color: #fff; border-bottom-right-radius: 3px; }
+
+  .comm-time { font-size: 8px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+  .comm-time.light { color: var(--text-3); }
+
+  .sender-name { font-size: 9px; font-weight: 700; color: var(--text-2); margin-left: 32px; margin-bottom: 2px; }
+
+  /* ─── PROFILE ─────────────────────────────────────────────────── */
+  .profile-screen { background: var(--bg); height: 100%; overflow-y: auto; scrollbar-width: none; }
+  .profile-screen::-webkit-scrollbar { display: none; }
+
+  .profile-header {
+    background: linear-gradient(160deg, var(--green-surface), #F0FDF8);
+    padding: 28px 18px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(76,175,130,0.35);
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  .profile-edit-btn {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 22px;
+    height: 22px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .profile-name { font-size: 18px; font-weight: 800; color: var(--text-1); }
+  .profile-email { font-size: 11px; color: var(--text-2); margin-top: 2px; }
+
+  .quick-stats-row {
+    display: flex;
+    gap: 0;
+    margin-top: 18px;
+    width: 100%;
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .qs { flex: 1; padding: 10px 4px; text-align: center; }
+  .qs:not(:last-child) { border-right: 1px solid var(--border); }
+  .qs-val { font-size: 13px; font-weight: 800; color: var(--text-1); }
+  .qs-lbl { font-size: 9px; color: var(--text-3); font-weight: 500; margin-top: 2px; }
+
+  .settings-section { padding: 14px 14px 0; }
+  .settings-section-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+  }
+
+  .settings-group {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .settings-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .settings-row:last-child { border-bottom: none; }
+
+  .settings-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--green-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .settings-label { font-size: 12px; font-weight: 600; color: var(--text-1); flex: 1; }
+  .settings-arrow { font-size: 10px; color: var(--text-3); }
+
+  .settings-badge {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 7px;
+    border-radius: 6px;
+  }
+
+  .badge-active { background: var(--green-surface); color: var(--green); }
+  .badge-setup { background: var(--amber-surface); color: var(--amber); }
+
+  .signout-btn {
+    margin: 0 14px 24px;
+    border: 1.5px solid rgba(229,115,115,0.4);
+    border-radius: 14px;
+    padding: 12px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--error);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  /* ─── CHECKIN SUCCESS ─────────────────────────────────────────── */
+  .success-screen {
+    background: var(--bg);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px 24px;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    box-shadow: 0 12px 32px rgba(76,175,130,0.4);
+    margin-bottom: 16px;
+    margin-top: 12px;
+  }
+
+  .success-title { font-size: 20px; font-weight: 800; color: var(--text-1); margin-bottom: 20px; }
+
+  .ai-response-card {
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    border-radius: 18px;
+    padding: 16px;
+    width: 100%;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 24px rgba(76,175,130,0.3);
+  }
+
+  .ai-resp-label { font-size: 10px; color: rgba(255,255,255,0.65); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+  .ai-resp-text { font-size: 12px; color: #fff; font-weight: 500; line-height: 1.6; }
+
+  .summary-row-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 14px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  .sum-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .sum-icon { font-size: 18px; }
+  .sum-val { font-size: 12px; font-weight: 700; color: var(--text-1); }
+  .sum-lbl { font-size: 9px; color: var(--text-3); font-weight: 500; }
+
+  /* ─── ANIMATIONS ──────────────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-5px); }
+  }
+
+  /* ─── FOOTER ──────────────────────────────────────────────────── */
+  .footer {
+    text-align: center;
+    padding: 60px 24px;
+    color: rgba(255,255,255,0.25);
+    font-size: 13px;
+    font-weight: 500;
+    border-top: 1px solid rgba(76,175,130,0.08);
+  }
+
+  .footer span { color: var(--green-light); }
+
+  /* ─── RESPONSIVE ──────────────────────────────────────────────── */
+  @media (max-width: 700px) {
+    .phone-frame { width: 240px; height: 500px; }
+    .hero h1 { font-size: 42px; }
+    .phone-showcase { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ──────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-badge">App Screens — Design Preview</div>
+  <h1>Weighless<br><span>Mockup Deck</span></h1>
+  <p>10 screens. One cohesive vision. Built with Flutter + Firebase + OpenAI — a production-ready weight-loss coaching app.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">10</div><div class="lbl">Screens</div></div>
+    <div class="hero-stat"><div class="num">4</div><div class="lbl">Firebase Services</div></div>
+    <div class="hero-stat"><div class="num">AI</div><div class="lbl">OpenAI Coach</div></div>
+    <div class="hero-stat"><div class="num">∞</div><div class="lbl">Possibilities</div></div>
+  </div>
+  <div class="scroll-hint">Scroll to explore</div>
+</section>
+
+<!-- ─── NAV ───────────────────────────────────────────────────────────── -->
+<nav class="nav-bar" id="navBar">
+  <div class="nav-item active" onclick="scrollToSection('s1')">01 Splash</div>
+  <div class="nav-item" onclick="scrollToSection('s2')">02 Login</div>
+  <div class="nav-item" onclick="scrollToSection('s3')">03 Onboarding</div>
+  <div class="nav-item" onclick="scrollToSection('s4')">04 Home</div>
+  <div class="nav-item" onclick="scrollToSection('s5')">05 Check-in</div>
+  <div class="nav-item" onclick="scrollToSection('s6')">06 AI Coach</div>
+  <div class="nav-item" onclick="scrollToSection('s7')">07 Meals</div>
+  <div class="nav-item" onclick="scrollToSection('s8')">08 Progress</div>
+  <div class="nav-item" onclick="scrollToSection('s9')">09 Community</div>
+  <div class="nav-item" onclick="scrollToSection('s10')">10 Profile</div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 1 — SPLASH + LOGIN + REGISTER                            -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div id="s1"></div>
+<section class="section">
+  <div class="section-label">
+    <div class="section-num">01</div>
+    <div class="section-title-wrap">
+      <h2>Splash Screen</h2>
+      <p>App launch experience — animated logo with auth-aware routing</p>
+    </div>
+  </div>
+
+  <div class="phone-showcase centered">
+    <!-- SPLASH -->
+    <div class="phone-wrap" style="animation-delay:0s">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="splash-screen">
+            <div class="splash-logo-mark">W</div>
+            <div class="splash-name">Weighless</div>
+            <div class="splash-tag">Your journey to a lighter you</div>
+            <div class="splash-loader"></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Splash</div>
+      <div class="phone-sublabel">Animated logo entrance</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 2 — LOGIN                                                 -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div id="s2"></div>
+<section class="section">
+  <div class="section-label">
+    <div class="section-num">02</div>
+    <div class="section-title-wrap">
+      <h2>Login &amp; Register</h2>
+      <p>Firebase Auth — Email/Password + Google OAuth with full validation</p>
+    </div>
+  </div>
+
+  <div class="phone-showcase centered">
+    <!-- LOGIN -->
+    <div class="phone-wrap" style="animation-delay:0s">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="login-screen">
+            <div class="login-logo-row">
+              <div class="login-logo-sm">W</div>
+              <div class="login-logo-text">Weighless</div>
+            </div>
+            <div class="screen-h1">Welcome back! 👋</div>
+            <div class="screen-h1-sub">Sign in to continue your journey</div>
+            <div class="input-field focused">
+              <span class="icon">✉</span>
+              <span style="color:var(--text-1);font-weight:600;font-size:12px">sarah@email.com</span>
+            </div>
+            <div class="input-field">
+              <span class="icon">🔒</span>
+              <span class="placeholder">••••••••</span>
+            </div>
+            <div style="text-align:right;font-size:10px;color:var(--green);font-weight:700;margin-bottom:14px">Forgot password?</div>
+            <div class="btn-grad">Sign In</div>
+            <div class="divider-or">or continue with</div>
+            <div class="btn-outline">
+              <span style="font-size:14px;font-weight:800">G</span> Continue with Google
+            </div>
+            <div class="register-link">Don't have an account? <span>Sign Up</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Login</div>
+      <div class="phone-sublabel">Email + Google OAuth</div>
+    </div>
+
+    <!-- REGISTER -->
+    <div class="phone-wrap" style="animation-delay:0.15s">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="login-screen">
+            <div style="font-size:18px;color:var(--text-1);margin-bottom:14px;margin-top:8px">‹</div>
+            <div class="screen-h1">Create account ✨</div>
+            <div class="screen-h1-sub">Start your weight-loss journey today</div>
+            <div class="input-field">
+              <span class="icon">👤</span>
+              <span class="placeholder">Full name</span>
+            </div>
+            <div class="input-field focused">
+              <span class="icon">✉</span>
+              <span style="color:var(--text-1);font-weight:600;font-size:12px">sarah@email.com</span>
+            </div>
+            <div class="input-field">
+              <span class="icon">🔒</span>
+              <span class="placeholder">Password</span>
+            </div>
+            <div class="input-field">
+              <span class="icon">🔒</span>
+              <span class="placeholder">Confirm password</span>
+            </div>
+            <div style="margin-top:12px">
+              <div class="btn-grad">Create Account</div>
+            </div>
+            <div class="register-link" style="margin-top:14px">Already have an account? <span>Sign In</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Register</div>
+      <div class="phone-sublabel">New account creation</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 3 — ONBOARDING                                           -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div id="s3"></div>
+<section class="section">
+  <div class="section-label">
+    <div class="section-num">03</div>
+    <div class="section-title-wrap">
+      <h2>Onboarding Flow</h2>
+      <p>5-step setup — name, weight, goals, age/gender, activity level</p>
+    </div>
+  </div>
+
+  <div class="phone-showcase">
+    <!-- Step 1 Welcome -->
+    <div class="phone-wrap" style="animation-delay:0s">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="onboarding-screen">
+            <div class="ob-dots">
+              <div class="ob-dot active"></div>
+              <div class="ob-dot"></div>
+              <div class="ob-dot"></div>
+              <div class="ob-dot"></div>
+              <div class="ob-dot"></div>
+            </div>
+            <div class="ob-icon">❤️</div>
+            <div style="font-size:22px;font-weight:800;color:var(--text-1);line-height:1.25;margin-bottom:10px">Let's get you<br>started! 🌱</div>
+            <div style="font-size:11.5px;color:var(--text-2);line-height:1.6;margin-bottom:24px">We'll set up your personalised coaching programme in just a few steps.</div>
+            <div class="feature-pill"><span class="pill-icon">🧠</span>AI-powered coaching</div>
+            <div class="feature-pill"><span class="pill-icon">🍽️</span>Personalised meal plans</div>
+            <div class="feature-pill"><span class="pill-icon">📈</span>Progress tracking</div>
+            <div style="flex:1"></div>
+            <div class="btn-grad" style="margin-top:20px">Let's begin →</div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Step 1 — Welcome</div>
+      <div class="phone-sublabel">Feature overview</div>
+    </div>
+
+    <!-- Step 2 Name -->
+    <div class="phone-wrap" style="animation-delay:0.1s">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="onboarding-screen">
+            <div class="ob-dots">
+              <div class="ob-dot"></div>
+              <div class="ob-dot active"></div>
+              <div class="ob-dot"></div>
+              <div class="ob-dot"></div>
+              <div class="ob-dot"></div>
+            </div>
+            <div style="font-size:22px;font-weight:800;color:var(--text-1);margin-bottom:8px">What should we<br>call you? 😊</div>
+            <div style="font-size:12px;color:var(--text-2);margin-bottom:28px">Your coach will use this name.</div>
+            <div class="input-field focused" style="font-size:16px;font-weight:700;padding:14px">
+              <span class="icon">🏷</span>
+              <span style="color:var(--text-1);font-size:16px;font-weight:700">Sarah</span>
+            </div>
+            <div style="flex:1"></div>
+            <div class="btn-grad" style="margin-top:auto">Continue →</div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Step 2 — Name</div>
+      <div class="phone-sublabel">Personal greeting</div>
+    </div>
+
+    <!-- Step 3 Weight -->
+    <div class="phone-wrap" style="animation-delay:0.2s">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="onboarding-screen">
+            <div class="ob-dots">
+              <div class="ob-dot"></div>
+              <div class="ob-dot"></div>
+              <div class="ob-dot active"></div>
+              <div class="ob-dot"></div>
+              <div class="ob-dot"></div>
+            </div>
+            <div style="font-size:22px;font-weight:800;color:var(--text-1);margin-bottom:8px">Your weight goals 🎯</div>
+            <div style="font-size:12px;color:var(--text-2);margin-bottom:20px">Helps personalise your programme.</div>
+            <div style="font-size:11px;font-weight:700;color:var(--text-2);margin-bottom:6px">Current weight (kg)</div>
+            <div class="weight-input-box" style="margin-bottom:14px"><span class="weight-num">78.5</span><span class="weight-unit">kg</span></div>
+            <div style="font-size:11px;font-weight:700;color:var(--text-2);margin-bottom:6px">Goal weight (kg)</div>
+            <div class="input-field" style="margin-bottom:10px;font-size:16px;font-weight:700;padding:14px">
+              <span class="placeholder" style="font-size:14px">e.g. 65.0</span>
+            </div>
+            <div style="background:var(--green-surface);border-radius:10px;padding:10px;font-size:10px;color:var(--text-2);display:flex;gap:6px;align-items:flex-start">
+              <span>ℹ️</span><span>A healthy goal is losing 0.5–1kg per week.</span>
+            </div>
+            <div class="btn-grad" style="margin-top:16px">Continue →</div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Step 3 — Weight</div>
+      <div class="phone-sublabel">Current + goal weight</div>
+    </div>
+
+    <!-- Step 5 Activity -->
+    <div class="phone-wrap" style="animation-delay:0.3s">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="onboarding-screen" style="overflow-y:auto;scrollbar-width:none">
+            <div class="ob-dots">
+              <div class="ob-dot"></div>
+              <div class="ob-dot"></div>
+              <div class="ob-dot"></div>
+              <div class="ob-dot"></div>
+              <div class="ob-dot active"></div>
+            </div>
+            <div style="font-size:22px;font-weight:800;color:var(--text-1);margin-bottom:6px">Activity level 🏃</div>
+            <div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Be honest — we'll adjust as you progress.</div>
+            <div style="background:var(--green-surface);border:2px solid var(--green);border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;margin-bottom:8px">
+              <div style="width:18px;height:18px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff">✓</div>
+              <span style="font-size:11px;font-weight:600;color:var(--text-1)">Sedentary (little exercise)</span>
+            </div>
+            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;margin-bottom:8px">
+              <div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--border)"></div>
+              <span style="font-size:11px;font-weight:600;color:var(--text-2)">Lightly active (1–3 days/week)</span>
+            </div>
+            <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;margin-bottom:8px">
+              <div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--border)"></div>
+              <span style="font-size:11px;font-weight:600;color:var(--text-2)">Moderately active (3–5 days)</span>
+            </div>
+            <div class="btn-grad" style="margin-top:12px">Complete Setup 🎉</div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Step 5 — Activity</div>
+      <div class="phone-sublabel">Final onboarding step</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 4 — HOME DASHBOARD                                       -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div id="s4"></div>
+<section class="section">
+  <div class="section-label">
+    <div class="section-num">04</div>
+    <div class="section-title-wrap">
+      <h2>Home Dashboard</h2>
+      <p>Daily hub — stats, AI motivation, check-in CTA, and meal preview</p>
+    </div>
+  </div>
+
+  <div class="phone-showcase centered">
+    <div class="phone-wrap" style="animation-delay:0s">
+      <div class="phone-frame">
+        <div class="phone-screen" style="position:relative">
+          <div class="home-screen">
+            <div class="home-header">
+              <div class="home-greet-row">
+                <div>
+                  <div class="greeting-sm">Good morning,</div>
+                  <div class="name-lg">Sarah 👋</div>
+                </div>
+                <div class="avatar-circle">S</div>
+              </div>
+              <div class="date-sm">Wednesday, 18 March 2026</div>
+            </div>
+            <div class="home-body">
+              <div class="stats-row">
+                <div class="stat-card">
+                  <div class="stat-card-icon" style="background:var(--green-surface)">⚖️</div>
+                  <div class="stat-val">78.5 kg</div>
+                  <div class="stat-lbl">Current weight</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-icon" style="background:var(--amber-surface)">🔥</div>
+                  <div class="stat-val">12 🔥</div>
+                  <div class="stat-lbl">Day streak</div>
+                </div>
+              </div>
+              <div class="motivation-card">
+                <div class="moti-emoji">🤖</div>
+                <div>
+                  <div class="moti-by">Coach Lea says:</div>
+                  <div class="moti-text">You've already decided to change — now it's just about showing up. And you're already here! 🌟</div>
+                </div>
+              </div>
+              <div class="cta-card" style="background:var(--amber-surface);border-color:rgba(255,179,71,0.4)">
+                <div class="cta-card-icon" style="background:var(--amber)">📋</div>
+                <div>
+                  <div class="cta-title">Daily Check-in</div>
+                  <div class="cta-sub">Log your weight & get AI feedback</div>
+                </div>
+                <span style="margin-left:auto;font-size:12px;color:var(--text-3)">›</span>
+              </div>
+              <div class="cta-card" style="background:var(--teal-surface);border-color:rgba(42,191,191,0.3)">
+                <div class="cta-card-icon" style="background:linear-gradient(135deg,var(--teal),var(--green))">🧠</div>
+                <div>
+                  <div class="cta-title">Chat with Coach Lea</div>
+                  <div class="cta-sub">Meal ideas, motivation & advice</div>
+                </div>
+                <span style="background:var(--teal);color:#fff;font-size:9px;font-weight:800;padding:3px 6px;border-radius:6px">AI</span>
+              </div>
+              <div class="section-head-row">
+                <div class="section-head">Today's Meals 🍽️</div>
+                <div class="section-action">See all</div>
+              </div>
+              <div class="meal-row-card">
+                <div class="meal-emoji-box" style="background:rgba(255,179,71,0.12)">🌅</div>
+                <div>
+                  <div class="meal-title">Overnight Oats</div>
+                  <div class="meal-cat" style="color:var(--amber)">Breakfast</div>
+                </div>
+                <div class="meal-cal">320 cal</div>
+              </div>
+              <div class="meal-row-card">
+                <div class="meal-emoji-box" style="background:rgba(76,175,130,0.12)">🥗</div>
+                <div>
+                  <div class="meal-title">Grilled Chicken Salad</div>
+                  <div class="meal-cat" style="color:var(--green)">Lunch</div>
+                </div>
+                <div class="meal-cal">420 cal</div>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-nav">
+            <div class="nav-tab active">
+              <div class="nav-active-dot"></div>
+              <div class="nav-tab-icon">🏠</div>
+              <div>Home</div>
+            </div>
+            <div class="nav-tab">
+              <div class="nav-tab-icon">🍽️</div>
+              <div>Meals</div>
+            </div>
+            <div class="nav-tab">
+              <div class="nav-tab-icon">📊</div>
+              <div>Progress</div>
+            </div>
+            <div class="nav-tab">
+              <div class="nav-tab-icon">👥</div>
+              <div>Community</div>
+            </div>
+            <div class="nav-tab">
+              <div class="nav-tab-icon">👤</div>
+              <div>Profile</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Home Dashboard</div>
+      <div class="phone-sublabel">Daily coaching hub</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 5 — CHECK-IN                                             -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div id="s5"></div>
+<section class="section">
+  <div class="section-label">
+    <div class="section-num">05</div>
+    <div class="section-title-wrap">
+      <h2>Daily Check-in</h2>
+      <p>Weight + adherence + mood → triggers personalised OpenAI response</p>
+    </div>
+  </div>
+
+  <div class="phone-showcase centered">
+    <!-- Form -->
+    <div class="phone-wrap" style="animation-delay:0s">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="checkin-screen">
+            <div class="checkin-topbar">
+              <span class="back-btn">✕</span>
+              <span class="topbar-title">Daily Check-in</span>
+              <span style="width:24px"></span>
+            </div>
+            <div class="checkin-body">
+              <div class="info-banner">
+                <span style="font-size:22px">📋</span>
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:var(--text-1)">How was your day?</div>
+                  <div style="font-size:10px;color:var(--text-2)">Your daily check-in takes 30 seconds</div>
+                </div>
+              </div>
+              <div class="section-label-sm">Today's weight</div>
+              <div class="weight-input-box">
+                <span class="weight-num">78.2</span>
+                <span class="weight-unit">kg</span>
+              </div>
+              <div class="section-label-sm">Did you follow your plan today?</div>
+              <div class="adherence-row">
+                <div class="adh-btn adh-yes">✅  Yes, I did!</div>
+                <div class="adh-btn adh-no">❌  Not today</div>
+              </div>
+              <div class="section-label-sm">How are you feeling?</div>
+              <div class="mood-grid">
+                <div class="mood-chip">😊 Great</div>
+                <div class="mood-chip unsel">🙂 Good</div>
+                <div class="mood-chip unsel">😐 Okay</div>
+                <div class="mood-chip unsel">😔 Not great</div>
+              </div>
+              <div class="btn-grad" style="font-size:12px">Submit & Get AI Feedback 🤖</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Check-in Form</div>
+      <div class="phone-sublabel">Daily weight log</div>
+    </div>
+
+    <!-- Success state -->
+    <div class="phone-wrap" style="animation-delay:0.15s">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="success-screen">
+            <div class="success-icon">✓</div>
+            <div class="success-title">Check-in Saved! 🎉</div>
+            <div class="ai-response-card">
+              <div class="ai-resp-label">🤖 Coach Lea says:</div>
+              <div class="ai-resp-text">Amazing work, Sarah! Sticking to your plan today builds lasting results. You're down 0.3kg — keep this momentum going. You're doing brilliantly! 💚</div>
+            </div>
+            <div class="summary-row-card">
+              <div class="sum-item">
+                <span class="sum-icon">⚖️</span>
+                <span class="sum-val">78.2 kg</span>
+                <span class="sum-lbl">Weight</span>
+              </div>
+              <div class="sum-item">
+                <span class="sum-icon">✅</span>
+                <span class="sum-val">Followed</span>
+                <span class="sum-lbl">Plan</span>
+              </div>
+              <div class="sum-item">
+                <span class="sum-icon">😊</span>
+                <span class="sum-val">Great</span>
+                <span class="sum-lbl">Mood</span>
+              </div>
+            </div>
+            <div class="btn-grad" style="width:100%">Back to Dashboard</div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Check-in Success</div>
+      <div class="phone-sublabel">AI feedback response</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 6 — AI CHAT                                              -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div id="s6"></div>
+<section class="section">
+  <div class="section-label">
+    <div class="section-num">06</div>
+    <div class="section-title-wrap">
+      <h2>AI Coach Chat</h2>
+      <p>WhatsApp-style chat with Coach Lea — powered by GPT-4o-mini</p>
+    </div>
+  </div>
+
+  <div class="phone-showcase centered">
+    <div class="phone-wrap" style="animation-delay:0s">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="chat-screen">
+            <div class="chat-topbar">
+              <span style="font-size:16px;color:var(--text-2)">‹</span>
+              <div class="chat-avatar">🤖</div>
+              <div>
+                <div class="chat-name">Coach Lea</div>
+                <div class="chat-online"><span class="online-dot"></span> AI Weight Loss Coach</div>
+              </div>
+              <span style="margin-left:auto;font-size:18px;color:var(--text-3)">ⓘ</span>
+            </div>
+            <div class="chat-messages">
+              <div class="msg-row">
+                <div class="bot-avatar-sm">🤖</div>
+                <div class="msg-bubble msg-bot">Hey Sarah! I'm Coach Lea 👋 I'm here to support your journey. What can I help with today?</div>
+              </div>
+              <div class="msg-row user">
+                <div class="msg-bubble msg-user">I'm having cravings for chocolate 😩</div>
+              </div>
+              <div class="msg-row">
+                <div class="bot-avatar-sm">🤖</div>
+                <div class="msg-bubble msg-bot">Cravings are totally normal! Try a glass of water first — thirst often feels like hunger. If it persists, a small square of dark chocolate (70%+) is totally fine. 🍫 You're doing great!</div>
+              </div>
+              <div class="msg-row user">
+                <div class="msg-bubble msg-user">What should I eat for lunch?</div>
+              </div>
+              <div class="typing-dots">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+              </div>
+            </div>
+            <div class="chat-input-bar">
+              <div class="chat-input-field">Message Coach Lea...</div>
+              <div class="send-btn">➤</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">AI Coach Chat</div>
+      <div class="phone-sublabel">Real-time coaching conversation</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 7 — MEAL PLAN                                            -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div id="s7"></div>
+<section class="section">
+  <div class="section-label">
+    <div class="section-num">07</div>
+    <div class="section-title-wrap">
+      <h2>Meal Plan</h2>
+      <p>4 categories, 16 pre-seeded meals from Firestore with rich cards</p>
+    </div>
+  </div>
+
+  <div class="phone-showcase centered">
+    <div class="phone-wrap" style="animation-delay:0s">
+      <div class="phone-frame">
+        <div class="phone-screen" style="position:relative">
+          <div class="meals-screen">
+            <div class="home-header" style="padding:28px 16px 10px">
+              <div style="font-size:20px;font-weight:800;color:var(--text-1)">Meal Plan 🍽️</div>
+              <div style="font-size:11px;color:var(--text-2);margin-top:2px">Your personalised nutrition guide</div>
+              <div style="background:linear-gradient(135deg,var(--green),var(--teal));border-radius:12px;padding:10px 14px;margin-top:10px;display:flex;justify-content:space-around">
+                <div style="text-align:center"><div style="font-size:13px;font-weight:800;color:#fff">~320</div><div style="font-size:9px;color:rgba(255,255,255,0.7)">Breakfast</div></div>
+                <div style="width:1px;background:rgba(255,255,255,0.2)"></div>
+                <div style="text-align:center"><div style="font-size:13px;font-weight:800;color:#fff">~440</div><div style="font-size:9px;color:rgba(255,255,255,0.7)">Lunch</div></div>
+                <div style="width:1px;background:rgba(255,255,255,0.2)"></div>
+                <div style="text-align:center"><div style="font-size:13px;font-weight:800;color:#fff">~490</div><div style="font-size:9px;color:rgba(255,255,255,0.7)">Dinner</div></div>
+                <div style="width:1px;background:rgba(255,255,255,0.2)"></div>
+                <div style="text-align:center"><div style="font-size:13px;font-weight:800;color:#fff">~165</div><div style="font-size:9px;color:rgba(255,255,255,0.7)">Snacks</div></div>
+              </div>
+            </div>
+            <div class="meals-tabs">
+              <div class="meal-tab active">🌅 Breakfast</div>
+              <div class="meal-tab">🥗 Lunch</div>
+              <div class="meal-tab">🍽️ Dinner</div>
+              <div class="meal-tab">🍎 Snacks</div>
+            </div>
+            <div class="meals-list">
+              <div class="meal-card">
+                <div class="meal-card-img" style="background:rgba(255,179,71,0.1)">
+                  🌅
+                  <div class="meal-cal-badge" style="color:var(--amber)">320 cal</div>
+                </div>
+                <div class="meal-card-body">
+                  <div class="meal-card-title">Overnight Oats with Berries</div>
+                  <div class="meal-card-desc">Rolled oats soaked overnight with fresh strawberries, blueberries and a drizzle of honey.</div>
+                  <div class="tag-row">
+                    <div class="tag" style="background:rgba(255,179,71,0.12);color:var(--amber)">Quick</div>
+                    <div class="tag" style="background:rgba(255,179,71,0.12);color:var(--amber)">High Fibre</div>
+                    <div class="tag" style="background:rgba(255,179,71,0.12);color:var(--amber)">Veggie</div>
+                  </div>
+                </div>
+              </div>
+              <div class="meal-card">
+                <div class="meal-card-img" style="background:rgba(255,179,71,0.1)">
+                  🥑
+                  <div class="meal-cal-badge" style="color:var(--amber)">380 cal</div>
+                </div>
+                <div class="meal-card-body">
+                  <div class="meal-card-title">Avocado & Egg Toast</div>
+                  <div class="meal-card-desc">Wholegrain toast with smashed avocado, poached egg, chilli flakes and lemon.</div>
+                  <div class="tag-row">
+                    <div class="tag" style="background:rgba(255,179,71,0.12);color:var(--amber)">Protein</div>
+                    <div class="tag" style="background:rgba(255,179,71,0.12);color:var(--amber)">Healthy Fats</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-nav">
+            <div class="nav-tab"><div class="nav-tab-icon">🏠</div><div>Home</div></div>
+            <div class="nav-tab active"><div class="nav-active-dot"></div><div class="nav-tab-icon">🍽️</div><div>Meals</div></div>
+            <div class="nav-tab"><div class="nav-tab-icon">📊</div><div>Progress</div></div>
+            <div class="nav-tab"><div class="nav-tab-icon">👥</div><div>Community</div></div>
+            <div class="nav-tab"><div class="nav-tab-icon">👤</div><div>Profile</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Meal Plan</div>
+      <div class="phone-sublabel">Tabbed categories with rich cards</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 8 — PROGRESS                                             -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div id="s8"></div>
+<section class="section">
+  <div class="section-label">
+    <div class="section-num">08</div>
+    <div class="section-title-wrap">
+      <h2>Progress Tracking</h2>
+      <p>Weight chart, goal bar, streak stats, and check-in history</p>
+    </div>
+  </div>
+
+  <div class="phone-showcase centered">
+    <div class="phone-wrap" style="animation-delay:0s">
+      <div class="phone-frame">
+        <div class="phone-screen" style="position:relative">
+          <div class="progress-screen">
+            <div class="home-header" style="padding:28px 16px 14px">
+              <div style="font-size:20px;font-weight:800;color:var(--text-1)">Your Progress 📈</div>
+              <div style="font-size:11px;color:var(--text-2);margin-top:2px">Track your journey day by day</div>
+            </div>
+            <div class="progress-body">
+              <div class="stats-row">
+                <div class="stat-card">
+                  <div class="stat-card-icon" style="background:var(--green-surface)">⚖️</div>
+                  <div class="stat-val">78.2</div>
+                  <div class="stat-lbl">Current (kg)</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-icon" style="background:var(--teal-surface)">🎯</div>
+                  <div class="stat-val">65.0</div>
+                  <div class="stat-lbl">Goal (kg)</div>
+                </div>
+              </div>
+              <div class="stats-row" style="margin-top:0">
+                <div class="stat-card">
+                  <div class="stat-card-icon" style="background:var(--amber-surface)">🔥</div>
+                  <div class="stat-val">12 days</div>
+                  <div class="stat-lbl">Streak</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-card-icon" style="background:rgba(100,181,246,0.1)">✅</div>
+                  <div class="stat-val">18</div>
+                  <div class="stat-lbl">Check-ins</div>
+                </div>
+              </div>
+              <div class="goal-bar-card">
+                <div class="goal-bar-top">
+                  <div class="goal-bar-title">🎯 Goal Progress</div>
+                  <div class="goal-bar-sub">13.2 kg to go</div>
+                </div>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill" style="width:45%"></div>
+                </div>
+                <div class="goal-bar-labels">
+                  <span>78.2 kg</span><span style="color:var(--green);font-weight:700">🎯 65.0 kg</span>
+                </div>
+              </div>
+              <div class="chart-card">
+                <div style="font-size:13px;font-weight:700;color:var(--text-1)">Weight History</div>
+                <div class="chart-area">
+                  <svg class="chart-svg" viewBox="0 0 240 110" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#4CAF82" stop-opacity="0.25"/>
+                        <stop offset="100%" stop-color="#4CAF82" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <line x1="0" y1="20" x2="240" y2="20" stroke="#E0E8E3" stroke-width="1" stroke-dasharray="4,4"/>
+                    <line x1="0" y1="55" x2="240" y2="55" stroke="#E0E8E3" stroke-width="1" stroke-dasharray="4,4"/>
+                    <line x1="0" y1="90" x2="240" y2="90" stroke="#E0E8E3" stroke-width="1" stroke-dasharray="4,4"/>
+                    <path d="M10,90 C30,85 50,80 70,72 C90,64 110,68 130,60 C150,52 170,48 190,38 C200,33 220,30 240,25" fill="url(#cg)"/>
+                    <path d="M10,90 C30,85 50,80 70,72 C90,64 110,68 130,60 C150,52 170,48 190,38 C200,33 220,30 240,25" fill="none" stroke="#4CAF82" stroke-width="2.5" stroke-linecap="round"/>
+                    <circle cx="10" cy="90" r="4" fill="#4CAF82" stroke="#fff" stroke-width="2"/>
+                    <circle cx="70" cy="72" r="4" fill="#4CAF82" stroke="#fff" stroke-width="2"/>
+                    <circle cx="130" cy="60" r="4" fill="#4CAF82" stroke="#fff" stroke-width="2"/>
+                    <circle cx="190" cy="38" r="4" fill="#4CAF82" stroke="#fff" stroke-width="2"/>
+                    <circle cx="240" cy="25" r="4" fill="#4CAF82" stroke="#fff" stroke-width="2"/>
+                  </svg>
+                </div>
+              </div>
+              <div style="font-size:13px;font-weight:700;color:var(--text-1);margin-bottom:10px">Recent Check-ins</div>
+              <div class="checkin-hist-card">
+                <div class="date-badge"><div class="date-num">18</div><div class="date-mon">MAR</div></div>
+                <div><div class="checkin-weight">78.2 kg</div><div class="checkin-mood">😊 Great</div></div>
+                <div class="plan-badge plan-yes">✅ On plan</div>
+              </div>
+              <div class="checkin-hist-card">
+                <div class="date-badge"><div class="date-num">17</div><div class="date-mon">MAR</div></div>
+                <div><div class="checkin-weight">78.4 kg</div><div class="checkin-mood">🙂 Good</div></div>
+                <div class="plan-badge plan-yes">✅ On plan</div>
+              </div>
+              <div class="checkin-hist-card">
+                <div class="date-badge"><div class="date-num">16</div><div class="date-mon">MAR</div></div>
+                <div><div class="checkin-weight">78.8 kg</div><div class="checkin-mood">😐 Okay</div></div>
+                <div class="plan-badge plan-no">❌ Missed</div>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-nav">
+            <div class="nav-tab"><div class="nav-tab-icon">🏠</div><div>Home</div></div>
+            <div class="nav-tab"><div class="nav-tab-icon">🍽️</div><div>Meals</div></div>
+            <div class="nav-tab active"><div class="nav-active-dot"></div><div class="nav-tab-icon">📊</div><div>Progress</div></div>
+            <div class="nav-tab"><div class="nav-tab-icon">👥</div><div>Community</div></div>
+            <div class="nav-tab"><div class="nav-tab-icon">👤</div><div>Profile</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Progress Tracking</div>
+      <div class="phone-sublabel">Chart, streak & history</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 9 — COMMUNITY                                            -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div id="s9"></div>
+<section class="section">
+  <div class="section-label">
+    <div class="section-num">09</div>
+    <div class="section-title-wrap">
+      <h2>Community Chat</h2>
+      <p>Real-time group chat via Firestore streams — live member support</p>
+    </div>
+  </div>
+
+  <div class="phone-showcase centered">
+    <div class="phone-wrap" style="animation-delay:0s">
+      <div class="phone-frame">
+        <div class="phone-screen" style="position:relative">
+          <div class="community-screen">
+            <div class="community-topbar">
+              <div class="community-icon">👥</div>
+              <div>
+                <div style="font-size:15px;font-weight:800;color:var(--text-1)">Community 💚</div>
+                <div style="font-size:10px;color:var(--text-2)">Support each other on your journey</div>
+              </div>
+              <div class="live-badge"><span style="width:6px;height:6px;background:var(--green);border-radius:50%;display:inline-block"></span> Live</div>
+            </div>
+            <div class="comm-guideline">❤️ Be kind, supportive and encouraging to fellow members 💚</div>
+            <div class="comm-messages">
+              <div class="sender-name">Priya M.</div>
+              <div class="comm-msg-row">
+                <div class="comm-avatar">P</div>
+                <div>
+                  <div class="comm-bubble bot">Just hit my 2-week streak! I can't believe how consistent I've been 🎉</div>
+                  <div class="comm-time light" style="margin-left:6px">2 min ago</div>
+                </div>
+              </div>
+              <div class="comm-msg-row me" style="margin-top:8px">
+                <div class="comm-avatar" style="background:linear-gradient(135deg,var(--teal),var(--green))">S</div>
+                <div>
+                  <div class="comm-bubble me">That's amazing Priya! You're an inspiration 🙌</div>
+                  <div class="comm-time" style="text-align:right">just now</div>
+                </div>
+              </div>
+              <div class="sender-name" style="margin-top:8px">James K.</div>
+              <div class="comm-msg-row">
+                <div class="comm-avatar" style="background:linear-gradient(135deg,#64B5F6,var(--teal))">J</div>
+                <div>
+                  <div class="comm-bubble bot">Struggled today but I still checked in. Small wins count! 💪</div>
+                  <div class="comm-time light" style="margin-left:6px">1 min ago</div>
+                </div>
+              </div>
+              <div class="comm-msg-row me" style="margin-top:8px">
+                <div class="comm-avatar" style="background:linear-gradient(135deg,var(--teal),var(--green))">S</div>
+                <div>
+                  <div class="comm-bubble me">Showing up is everything James! 🌟</div>
+                  <div class="comm-time" style="text-align:right">just now</div>
+                </div>
+              </div>
+            </div>
+            <div class="chat-input-bar">
+              <div class="chat-input-field">Share with the community...</div>
+              <div class="send-btn">➤</div>
+            </div>
+          </div>
+          <div class="bottom-nav">
+            <div class="nav-tab"><div class="nav-tab-icon">🏠</div><div>Home</div></div>
+            <div class="nav-tab"><div class="nav-tab-icon">🍽️</div><div>Meals</div></div>
+            <div class="nav-tab"><div class="nav-tab-icon">📊</div><div>Progress</div></div>
+            <div class="nav-tab active"><div class="nav-active-dot"></div><div class="nav-tab-icon">👥</div><div>Community</div></div>
+            <div class="nav-tab"><div class="nav-tab-icon">👤</div><div>Profile</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Community Chat</div>
+      <div class="phone-sublabel">Real-time Firestore group chat</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 10 — PROFILE                                             -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div id="s10"></div>
+<section class="section">
+  <div class="section-label">
+    <div class="section-num">10</div>
+    <div class="section-title-wrap">
+      <h2>Profile &amp; Settings</h2>
+      <p>User stats, edit profile, API key setup, notifications, sign out</p>
+    </div>
+  </div>
+
+  <div class="phone-showcase centered">
+    <div class="phone-wrap" style="animation-delay:0s">
+      <div class="phone-frame">
+        <div class="phone-screen" style="position:relative">
+          <div class="profile-screen">
+            <div class="profile-header">
+              <div class="profile-avatar">S<div class="profile-edit-btn">✏️</div></div>
+              <div class="profile-name">Sarah Johnson</div>
+              <div class="profile-email">sarah@email.com</div>
+              <div class="quick-stats-row">
+                <div class="qs"><div class="qs-val">78.2 kg</div><div class="qs-lbl">Current</div></div>
+                <div class="qs"><div class="qs-val">65.0 kg</div><div class="qs-lbl">Goal</div></div>
+                <div class="qs"><div class="qs-val">12 🔥</div><div class="qs-lbl">Streak</div></div>
+                <div class="qs"><div class="qs-val">18</div><div class="qs-lbl">Check-ins</div></div>
+              </div>
+            </div>
+            <div class="settings-section">
+              <div class="settings-section-title">My Profile</div>
+              <div class="settings-group">
+                <div class="settings-row">
+                  <div class="settings-icon">👤</div>
+                  <div class="settings-label">Edit Profile</div>
+                  <span class="settings-arrow">›</span>
+                </div>
+                <div class="settings-row">
+                  <div class="settings-icon">🏃</div>
+                  <div class="settings-label">Activity Level</div>
+                  <span class="settings-arrow">›</span>
+                </div>
+              </div>
+              <div class="settings-section-title">AI Coach</div>
+              <div class="settings-group">
+                <div class="settings-row">
+                  <div class="settings-icon">🔑</div>
+                  <div class="settings-label">OpenAI API Key</div>
+                  <div class="settings-badge badge-active">Active</div>
+                </div>
+                <div class="settings-row">
+                  <div class="settings-icon">🧠</div>
+                  <div class="settings-label">Chat with Coach</div>
+                  <span class="settings-arrow">›</span>
+                </div>
+              </div>
+              <div class="settings-section-title">Notifications</div>
+              <div class="settings-group">
+                <div class="settings-row">
+                  <div class="settings-icon">🔔</div>
+                  <div class="settings-label">Daily Reminder</div>
+                  <div style="width:34px;height:20px;background:var(--green);border-radius:10px;position:relative"><div style="width:16px;height:16px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2px"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="signout-btn">⬡ Sign Out</div>
+          </div>
+          <div class="bottom-nav">
+            <div class="nav-tab"><div class="nav-tab-icon">🏠</div><div>Home</div></div>
+            <div class="nav-tab"><div class="nav-tab-icon">🍽️</div><div>Meals</div></div>
+            <div class="nav-tab"><div class="nav-tab-icon">📊</div><div>Progress</div></div>
+            <div class="nav-tab"><div class="nav-tab-icon">👥</div><div>Community</div></div>
+            <div class="nav-tab active"><div class="nav-active-dot"></div><div class="nav-tab-icon">👤</div><div>Profile</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Profile</div>
+      <div class="phone-sublabel">Settings & account management</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────────────────────── -->
+<div class="divider"></div>
+<div class="footer">
+  Built with <span>Flutter + Firebase + OpenAI</span> · Weighless App · 2026
+</div>
+
+<script>
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Active nav on scroll
+  const sections = ['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10'];
+  const navItems = document.querySelectorAll('.nav-item');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        const idx = sections.indexOf(id);
+        navItems.forEach((item, i) => {
+          item.classList.toggle('active', i === idx);
+        });
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-80px 0px -60% 0px' });
+
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+</script>
+</body>
+</html>
