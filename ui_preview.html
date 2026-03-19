@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mbatha Logistics — UI Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+<style>
+:root {
+  --color-primary: #1a1a2e;
+  --color-primary-light: #16213e;
+  --color-accent: #e8a838;
+  --color-accent-light: #fdf3dc;
+  --color-accent-dark: #c48c20;
+  --color-bg: #f8f7f4;
+  --color-surface: #ffffff;
+  --color-surface-2: #f2f1ee;
+  --color-border: #e8e6e1;
+  --color-text: #1a1a2e;
+  --color-text-muted: #6b6880;
+  --color-text-light: #9896a4;
+  --shadow-sm: 0 1px 3px rgba(26,26,46,0.06), 0 1px 2px rgba(26,26,46,0.04);
+  --shadow-md: 0 4px 16px rgba(26,26,46,0.08), 0 2px 6px rgba(26,26,46,0.05);
+  --shadow-lg: 0 12px 40px rgba(26,26,46,0.12), 0 4px 12px rgba(26,26,46,0.06);
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px;
+  --radius-xl: 28px; --radius-full: 999px;
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --t: 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-body); background: #e8e6e1; color: var(--color-text); }
+h1,h2,h3,h4,h5,h6 { font-family: var(--font-display); line-height: 1.2; }
+a { color: inherit; text-decoration: none; }
+
+/* ── Preview Shell ── */
+.preview-shell {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.preview-title {
+  text-align: center;
+  margin-bottom: 40px;
+  font-family: var(--font-display);
+}
+.preview-title h1 { font-size: 2rem; color: var(--color-primary); margin-bottom: 8px; }
+.preview-title p { color: var(--color-text-muted); font-size: 15px; }
+
+.screen-tabs {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  justify-content: center; margin-bottom: 40px;
+}
+.tab-btn {
+  display: flex; align-items: center; gap: 7px;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  font-family: var(--font-body); font-size: 14px; font-weight: 600;
+  color: var(--color-text-muted); cursor: pointer;
+  transition: all var(--t);
+}
+.tab-btn .material-icons-round { font-size: 17px; }
+.tab-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.tab-btn.active { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+
+.screen { display: none; }
+.screen.active { display: block; animation: fadeInUp 0.4s ease; }
+
+@keyframes fadeInUp {
+  from { opacity:0; transform: translateY(16px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* ── Shared ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px; border-radius: var(--radius-full);
+  font-family: var(--font-body); font-size: 14px; font-weight: 600;
+  cursor: pointer; border: none; white-space: nowrap; transition: all var(--t);
+}
+.btn-primary { background: var(--color-primary); color: #fff; }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-accent  { background: var(--color-accent); color: var(--color-primary); }
+.btn-accent:hover { background: var(--color-accent-dark); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--color-primary); border: 1.5px solid var(--color-border); }
+.btn-outline:hover { border-color: var(--color-primary); background: var(--color-surface-2); }
+.btn-ghost { background: transparent; color: var(--color-text-muted); padding: 9px 14px; border-radius: var(--radius-sm); }
+.btn-ghost:hover { background: var(--color-surface-2); color: var(--color-text); }
+.btn-lg { padding: 16px 32px; font-size: 15px; }
+.btn-sm { padding: 8px 16px; font-size: 12px; }
+.btn-block { width: 100%; justify-content: center; }
+.material-icons-round { font-size: inherit; vertical-align: middle; line-height: 1; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 12px; border-radius: var(--radius-full);
+  font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+}
+.badge-pending   { background: #fef3c7; color: #92400e; }
+.badge-assigned  { background: #dbeafe; color: #1e40af; }
+.badge-completed { background: #d1fae5; color: #065f46; }
+.badge-cancelled { background: #fee2e2; color: #991b1b; }
+
+.container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
+/* ========================================================
+   SCREEN 1 — LANDING PAGE
+   ======================================================== */
+.nav {
+  background: rgba(248,247,244,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky; top: 0; z-index: 100;
+}
+.nav__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 66px; max-width: 1160px; margin: 0 auto; padding: 0 24px; gap: 24px;
+}
+.nav__logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-weight: 700; font-size: 18px;
+}
+.nav__logo-icon { font-size: 24px !important; color: var(--color-accent); }
+.nav__links { display: flex; gap: 28px; }
+.nav__links a { font-size: 14px; font-weight: 500; color: var(--color-text-muted); }
+.nav__links a:hover { color: var(--color-primary); }
+
+.hero-section {
+  background: var(--color-bg);
+  min-height: 90vh;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+}
+.hero-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 55% 50% at 75% 50%, rgba(232,168,56,.09) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-content { max-width: 560px; z-index: 1; padding: 80px 0; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--color-accent-light); color: var(--color-accent-dark);
+  padding: 6px 14px; border-radius: var(--radius-full);
+  font-size: 12px; font-weight: 700; margin-bottom: 24px;
+  border: 1px solid rgba(232,168,56,.3);
+}
+.hero-title {
+  font-size: 4rem; font-weight: 800; line-height: 1.05;
+  color: var(--color-primary); margin-bottom: 18px;
+}
+.hero-title span { color: var(--color-accent); }
+.hero-sub { font-size: 17px; color: var(--color-text-muted); line-height: 1.7; margin-bottom: 36px; max-width: 460px; }
+.hero-actions { display: flex; gap: 12px; margin-bottom: 48px; flex-wrap: wrap; }
+.hero-stats { display: flex; align-items: center; gap: 24px; }
+.hero-stat { display: flex; flex-direction: column; }
+.hero-stat strong { font-family: var(--font-display); font-size: 20px; font-weight: 700; }
+.hero-stat span { font-size: 12px; color: var(--color-text-muted); }
+.hero-stat-div { width: 1px; height: 32px; background: var(--color-border); }
+
+.hero-float {
+  position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 16px;
+}
+.float-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 16px 20px;
+  display: flex; align-items: center; gap: 14px; min-width: 260px;
+}
+.float-card .material-icons-round { font-size: 28px; color: var(--color-accent); }
+.float-card strong { display: block; font-size: 14px; font-weight: 600; }
+.float-card small { font-size: 12px; color: var(--color-text-muted); }
+
+.section { padding: 88px 0; }
+.section--alt { background: var(--color-surface-2); }
+.section-header { text-align: center; margin-bottom: 52px; }
+.section-label {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--color-accent-dark);
+  background: var(--color-accent-light); padding: 4px 14px;
+  border-radius: var(--radius-full); margin-bottom: 12px;
+}
+.section-header h2 { font-size: 2.4rem; margin-bottom: 12px; }
+.section-header p  { font-size: 16px; color: var(--color-text-muted); max-width: 500px; margin: 0 auto; }
+
+.services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.service-card {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 28px; display: flex; flex-direction: column; gap: 12px;
+  transition: all var(--t); cursor: pointer; position: relative; overflow: hidden;
+}
+.service-card:hover { border-color: var(--color-accent); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.service-icon {
+  width: 50px; height: 50px;
+  background: var(--color-accent-light); border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+}
+.service-icon .material-icons-round { font-size: 24px; color: var(--color-accent-dark); }
+.service-card h3 { font-size: 16px; font-weight: 700; }
+.service-card p  { font-size: 13px; color: var(--color-text-muted); line-height: 1.6; flex: 1; }
+
+.pricing-cards { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; max-width: 680px; margin: 0 auto 20px; }
+.pricing-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  padding: 18px 20px; display: flex; align-items: center; gap: 14px;
+}
+.pricing-card .material-icons-round { font-size: 28px; color: var(--color-accent); }
+.pricing-card-service { font-size: 13px; color: var(--color-text-muted); margin-bottom: 3px; }
+.pricing-card-price strong { font-family: var(--font-display); font-size: 20px; color: var(--color-primary); }
+.pricing-card-price { font-size: 13px; }
+
+.footer-bar {
+  background: var(--color-primary); color: rgba(255,255,255,.65);
+  padding: 56px 0 0;
+}
+.footer-inner {
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+  max-width: 1160px; margin: 0 auto; padding: 0 24px 48px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.footer-brand .nav__logo { color: white; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 18px; }
+.footer-brand p { font-size: 13px; max-width: 260px; }
+.footer-links { display: flex; flex-direction: column; gap: 9px; }
+.footer-links strong { color: white; font-size: 13px; margin-bottom: 4px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,.55); }
+.footer-bottom { max-width: 1160px; margin: 0 auto; padding: 18px 24px; font-size: 12px; display: flex; justify-content: space-between; color: rgba(255,255,255,.35); }
+
+/* ========================================================
+   SCREEN 2 — BOOKING FORM
+   ======================================================== */
+.booking-page-wrap { background: var(--color-bg); min-height: 100vh; }
+.booking-hdr {
+  background: var(--color-surface); border-bottom: 1px solid var(--color-border);
+  padding: 0;
+}
+.booking-hdr-inner {
+  max-width: 1160px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; height: 62px;
+}
+.back-lnk {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: var(--color-text-muted);
+}
+.back-lnk .material-icons-round { font-size: 18px; }
+
+.booking-body {
+  max-width: 1160px; margin: 0 auto; padding: 40px 24px 80px;
+  display: grid; grid-template-columns: 1fr 320px; gap: 44px; align-items: start;
+}
+.booking-form-hdr { margin-bottom: 28px; }
+.booking-form-hdr h1 { font-size: 1.9rem; margin-bottom: 6px; }
+.booking-form-hdr p  { font-size: 15px; color: var(--color-text-muted); }
+.booking-form-col { display: flex; flex-direction: column; gap: 24px; }
+
+.form-section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 26px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.form-section legend {
+  display: flex; align-items: center; gap: 9px;
+  font-family: var(--font-display); font-size: 15px; font-weight: 700;
+  color: var(--color-primary); padding-bottom: 14px;
+  border-bottom: 1px solid var(--color-border); width: 100%; margin-bottom: 6px;
+}
+.form-section legend .material-icons-round { font-size: 19px; color: var(--color-accent-dark); }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.form-control {
+  padding: 12px 14px; border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md); font-size: 14px; font-family: var(--font-body);
+  color: var(--color-text); background: var(--color-surface); outline: none; width: 100%;
+}
+.form-control:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(26,26,46,.07); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.input-icon-wrap { position: relative; }
+.input-icon-wrap .i-icon {
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  font-size: 18px; color: var(--color-text-light); pointer-events: none;
+}
+.input-icon-wrap .form-control { padding-left: 40px; }
+
+.upload-zone {
+  border: 2px dashed var(--color-border); border-radius: var(--radius-md);
+  padding: 28px; text-align: center; cursor: pointer; transition: all var(--t);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.upload-zone:hover { border-color: var(--color-accent); background: var(--color-accent-light); }
+.upload-zone .material-icons-round { font-size: 32px; color: var(--color-text-light); }
+.upload-zone p { font-size: 14px; font-weight: 600; }
+.upload-zone small { font-size: 12px; color: var(--color-text-muted); }
+
+.sidebar-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 22px;
+}
+.sidebar-card h3 { display: flex; align-items: center; gap: 8px; font-size: 15px; margin-bottom: 18px; }
+.sidebar-card h3 .material-icons-round { font-size: 19px; color: var(--color-accent-dark); }
+.sidebar-steps { display: flex; flex-direction: column; gap: 14px; }
+.sidebar-step { display: flex; gap: 12px; align-items: flex-start; }
+.step-dot {
+  min-width: 26px; height: 26px;
+  background: var(--color-accent); color: var(--color-primary);
+  border-radius: 50%; font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+}
+.sidebar-step p { font-size: 13px; color: var(--color-text-muted); line-height: 1.5; padding-top: 3px; }
+
+/* ========================================================
+   SCREEN 3 — CONFIRMATION
+   ======================================================== */
+.confirm-wrap {
+  background: var(--color-bg);
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px 24px;
+}
+.confirm-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg); overflow: hidden;
+  max-width: 640px; width: 100%;
+}
+.confirm-card-hdr {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #2d2d5c 100%);
+  padding: 44px 36px; text-align: center; color: white;
+}
+.confirm-icon-circle {
+  width: 68px; height: 68px; border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;
+}
+.confirm-icon-circle .material-icons-round { font-size: 36px; color: #4ade80; }
+.confirm-card-hdr h1 { font-size: 1.9rem; color: white; margin-bottom: 10px; }
+.confirm-card-hdr p  { font-size: 15px; color: rgba(255,255,255,.72); line-height: 1.6; }
+.confirm-ref {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.1); padding: 6px 14px;
+  border-radius: var(--radius-full); font-size: 13px; color: rgba(255,255,255,.8);
+  margin-top: 14px;
+}
+.confirm-card-body { padding: 32px 36px; }
+.confirm-card-body h3 { font-size: 15px; font-weight: 700; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--color-border); }
+.summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.sum-item { display: flex; flex-direction: column; gap: 4px; }
+.sum-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--color-text-light); }
+.sum-value { font-size: 14px; font-weight: 500; }
+.confirm-card-footer {
+  padding: 22px 36px; background: var(--color-surface-2);
+  border-top: 1px solid var(--color-border);
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+
+/* ========================================================
+   SCREEN 4 — ADMIN LOGIN
+   ======================================================== */
+.login-wrap {
+  display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh;
+}
+.login-left-panel {
+  background: var(--color-primary);
+  display: flex; flex-direction: column; padding: 44px;
+  position: relative; overflow: hidden;
+}
+.login-left-panel::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 80% 60%, rgba(232,168,56,.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+.login-left-brand {
+  display: flex; align-items: center; gap: 10px;
+  color: white; font-family: var(--font-display); font-weight: 700; font-size: 19px;
+}
+.login-left-brand .material-icons-round { font-size: 26px; color: var(--color-accent); }
+.login-visual-area { flex: 1; display: flex; align-items: center; justify-content: center; }
+.login-visual-card {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--radius-lg); padding: 20px 26px;
+  display: flex; align-items: center; gap: 14px;
+  backdrop-filter: blur(8px);
+}
+.login-visual-card .material-icons-round { font-size: 34px; color: #4ade80; }
+.login-visual-card strong { display: block; color: white; font-size: 15px; }
+.login-visual-card small  { color: rgba(255,255,255,.55); font-size: 12px; }
+
+.login-right-panel {
+  background: var(--color-bg);
+  display: flex; align-items: center; justify-content: center; padding: 48px 24px;
+}
+.login-box { width: 100%; max-width: 400px; }
+.login-box-hdr { margin-bottom: 32px; }
+.login-box-hdr h1 { font-size: 2rem; margin-bottom: 6px; }
+.login-box-hdr p  { font-size: 14px; color: var(--color-text-muted); }
+.login-form { display: flex; flex-direction: column; gap: 18px; }
+
+/* ========================================================
+   SCREEN 5 — ADMIN DASHBOARD
+   ======================================================== */
+.admin-wrap {
+  display: flex; min-height: 100vh; background: var(--color-bg);
+}
+.sidebar {
+  width: 232px; background: var(--color-primary);
+  display: flex; flex-direction: column;
+  flex-shrink: 0; min-height: 100vh; position: sticky; top: 0; height: 100vh;
+}
+.sidebar-hdr {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 14px; border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.sidebar-logo {
+  display: flex; align-items: center; gap: 9px;
+  color: white; font-family: var(--font-display); font-weight: 700; font-size: 16px;
+}
+.sidebar-logo .material-icons-round { font-size: 24px; color: var(--color-accent); }
+.sidebar-nav { flex: 1; padding: 14px 9px; display: flex; flex-direction: column; gap: 3px; }
+.nav-item {
+  display: flex; align-items: center; gap: 11px;
+  padding: 10px 12px; border-radius: var(--radius-md);
+  font-size: 13px; font-weight: 500; color: rgba(255,255,255,.6);
+  cursor: pointer; transition: all var(--t);
+}
+.nav-item .material-icons-round { font-size: 19px; flex-shrink: 0; }
+.nav-item:hover { background: rgba(255,255,255,.07); color: white; }
+.nav-item.active { background: rgba(232,168,56,.15); color: var(--color-accent); }
+.sidebar-foot {
+  padding: 12px 9px; border-top: 1px solid rgba(255,255,255,.08);
+}
+.admin-main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.topbar {
+  height: 62px; background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; gap: 14px; position: sticky; top: 0; z-index: 50;
+}
+.topbar-left { display: flex; align-items: center; gap: 10px; }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.breadcrumb { font-size: 13px; font-weight: 600; color: var(--color-text-muted); }
+.user-chip {
+  display: flex; align-items: center; gap: 9px;
+}
+.user-avatar {
+  width: 32px; height: 32px; background: var(--color-primary);
+  color: white; border-radius: 50%;
+  font-size: 13px; font-weight: 700; font-family: var(--font-display);
+  display: flex; align-items: center; justify-content: center;
+}
+.user-email { font-size: 13px; color: var(--color-text-muted); }
+
+.page-content { padding: 28px; flex: 1; overflow: auto; }
+.page-hdr { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 26px; gap: 12px; }
+.page-hdr h1 { font-size: 1.6rem; margin-bottom: 3px; }
+.page-hdr p  { font-size: 13px; color: var(--color-text-muted); }
+
+.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 24px; }
+.stat-card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; align-items: center; gap: 14px;
+}
+.stat-ic {
+  width: 44px; height: 44px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+}
+.stat-ic .material-icons-round { font-size: 20px; }
+.stat-ic-total    { background: #f0f0ff; } .stat-ic-total .material-icons-round    { color: #6366f1; }
+.stat-ic-pending  { background: #fef3c7; } .stat-ic-pending .material-icons-round  { color: #f59e0b; }
+.stat-ic-assigned { background: #dbeafe; } .stat-ic-assigned .material-icons-round { color: #3b82f6; }
+.stat-ic-done     { background: #d1fae5; } .stat-ic-done .material-icons-round     { color: #10b981; }
+.stat-val { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; line-height: 1; margin-bottom: 3px; }
+.stat-lbl { font-size: 12px; color: var(--color-text-muted); font-weight: 500; }
+
+.table-card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); overflow: hidden;
+}
+.table-card-hdr {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 20px; border-bottom: 1px solid var(--color-border);
+}
+.table-card-hdr h2 { font-size: 15px; font-weight: 700; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th {
+  padding: 10px 16px; text-align: left;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--color-text-light); background: var(--color-surface-2);
+  border-bottom: 1px solid var(--color-border); white-space: nowrap;
+}
+td {
+  padding: 13px 16px; border-bottom: 1px solid var(--color-border);
+  vertical-align: middle; color: var(--color-text);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--color-surface-2); }
+.cust-cell { display: flex; align-items: center; gap: 9px; }
+.cust-av {
+  width: 30px; height: 30px; background: var(--color-primary); color: white;
+  border-radius: 50%; font-size: 12px; font-weight: 700; font-family: var(--font-display);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.cust-name  { font-weight: 600; font-size: 13px; }
+.cust-phone { font-size: 11px; color: var(--color-text-muted); }
+.svc-chip {
+  background: var(--color-surface-2); border: 1px solid var(--color-border);
+  border-radius: var(--radius-full); padding: 2px 9px; font-size: 11px; font-weight: 500;
+}
+
+/* ========================================================
+   SCREEN 6 — JOB DETAIL
+   ======================================================== */
+.detail-layout { display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: start; }
+.detail-main   { display: flex; flex-direction: column; gap: 18px; }
+.detail-sidebar-col { display: flex; flex-direction: column; gap: 14px; }
+.d-card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); overflow: hidden;
+}
+.d-card-hdr {
+  display: flex; align-items: center; gap: 9px;
+  padding: 14px 18px; background: var(--color-surface-2);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 13px; font-weight: 700;
+}
+.d-card-hdr .material-icons-round { font-size: 17px; color: var(--color-accent-dark); }
+.d-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.d-item { padding: 14px 18px; border-bottom: 1px solid var(--color-border); border-right: 1px solid var(--color-border); }
+.d-item:nth-child(2n) { border-right: none; }
+.d-item:nth-last-child(-n+2) { border-bottom: none; }
+.d-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--color-text-light); margin-bottom: 4px; }
+.d-value { font-size: 14px; font-weight: 500; }
+
+.photo-thumb-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; padding: 14px; }
+.photo-thumb-item {
+  aspect-ratio: 1; border-radius: var(--radius-sm); overflow: hidden;
+  border: 1px solid var(--color-border); background: var(--color-surface-2);
+  display: flex; align-items: center; justify-content: center;
+}
+.photo-thumb-item .material-icons-round { font-size: 24px; color: var(--color-text-light); }
+
+.status-options { display: flex; flex-direction: column; gap: 6px; }
+.status-opt {
+  padding: 9px 13px; border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border); cursor: pointer;
+  transition: all var(--t); display: flex; align-items: center; background: var(--color-surface);
+}
+.status-opt.sel { border-color: var(--color-primary); background: var(--color-surface-2); }
+.action-form-pad { padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+</style>
+</head>
+<body>
+
+<div class="preview-shell">
+
+  <div class="preview-title">
+    <h1>Mbatha Logistics — UI Preview</h1>
+    <p>Interactive preview of all screens. Click a tab to switch views.</p>
+  </div>
+
+  <div class="screen-tabs">
+    <button class="tab-btn active" onclick="showScreen('landing')">
+      <span class="material-icons-round">home</span> Landing Page
+    </button>
+    <button class="tab-btn" onclick="showScreen('booking')">
+      <span class="material-icons-round">edit_note</span> Booking Form
+    </button>
+    <button class="tab-btn" onclick="showScreen('confirm')">
+      <span class="material-icons-round">check_circle</span> Confirmation
+    </button>
+    <button class="tab-btn" onclick="showScreen('login')">
+      <span class="material-icons-round">lock</span> Admin Login
+    </button>
+    <button class="tab-btn" onclick="showScreen('dashboard')">
+      <span class="material-icons-round">dashboard</span> Dashboard
+    </button>
+    <button class="tab-btn" onclick="showScreen('jobdetail')">
+      <span class="material-icons-round">work</span> Job Detail
+    </button>
+  </div>
+
+  <!-- ======================================================
+       SCREEN 1 — LANDING
+       ====================================================== -->
+  <div id="s-landing" class="screen active">
+    <nav class="nav">
+      <div class="nav__inner">
+        <div class="nav__logo">
+          <span class="material-icons-round nav__logo-icon">local_shipping</span>
+          Mbatha Logistics
+        </div>
+        <div class="nav__links">
+          <a href="#">Services</a>
+          <a href="#">Pricing</a>
+          <a href="#">Contact</a>
+        </div>
+        <button class="btn btn-primary btn-sm">
+          <span class="material-icons-round" style="font-size:15px">add_circle_outline</span>
+          Book Now
+        </button>
+      </div>
+    </nav>
+
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="material-icons-round" style="font-size:13px;color:var(--color-accent)">verified</span>
+            Trusted Logistics in KwaZulu-Natal
+          </div>
+          <h1 class="hero-title">Move anything,<br><span>anywhere.</span></h1>
+          <p class="hero-sub">Professional deliveries, removals and refuse collection. Fast, reliable, and affordable — serving Durban and surrounding areas.</p>
+          <div class="hero-actions">
+            <button class="btn btn-accent btn-lg">
+              <span class="material-icons-round">calendar_today</span>
+              Book a Service
+            </button>
+            <button class="btn btn-outline btn-lg">
+              <span class="material-icons-round">chat</span>
+              WhatsApp Us
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>500+</strong><span>Jobs Completed</span></div>
+            <div class="hero-stat-div"></div>
+            <div class="hero-stat"><strong>Same Day</strong><span>Available</span></div>
+            <div class="hero-stat-div"></div>
+            <div class="hero-stat"><strong>KZN-Wide</strong><span>Coverage</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-float">
+        <div class="float-card" style="margin-right:40px">
+          <span class="material-icons-round">local_shipping</span>
+          <div><strong>Job #1042</strong><small>In Progress · Durban</small></div>
+          <span class="badge badge-assigned">Assigned</span>
+        </div>
+        <div class="float-card" style="margin-left:40px">
+          <span class="material-icons-round" style="color:#4ade80">check_circle</span>
+          <div><strong>Delivery Done</strong><small>Springfield, Durban</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background:var(--color-bg)">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">What we offer</span>
+          <h2>Our Services</h2>
+          <p>From a single parcel to a full relocation — we've got you covered.</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon"><span class="material-icons-round">local_shipping</span></div>
+            <h3>Deliveries</h3>
+            <p>Fast, reliable delivery of goods across KwaZulu-Natal. Same-day and scheduled options available.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><span class="material-icons-round">move_to_inbox</span></div>
+            <h3>Furniture Removals</h3>
+            <p>Professional furniture and household removals. We handle your belongings with care.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><span class="material-icons-round">delete_sweep</span></div>
+            <h3>Refuse Removal</h3>
+            <p>Efficient waste, yard refuse and garbage collection. Keep your space clean effortlessly.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><span class="material-icons-round">recycling</span></div>
+            <h3>Yard Waste</h3>
+            <p>Garden clean-ups, green waste and bulk refuse removal handled professionally.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><span class="material-icons-round">home_work</span></div>
+            <h3>Relocation</h3>
+            <p>Complete home or office relocation services. We manage the entire move for you.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><span class="material-icons-round">inventory_2</span></div>
+            <h3>Garbage Collection</h3>
+            <p>Scheduled and on-demand garbage collection for residential and commercial properties.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Transparent pricing</span>
+          <h2>Simple Pricing Guide</h2>
+          <p>Competitive rates with no hidden fees.</p>
+        </div>
+        <div class="pricing-cards">
+          <div class="pricing-card">
+            <span class="material-icons-round">directions_car</span>
+            <div>
+              <div class="pricing-card-service">Small Delivery (local)</div>
+              <div class="pricing-card-price">From <strong>R 200</strong></div>
+            </div>
+          </div>
+          <div class="pricing-card">
+            <span class="material-icons-round">local_shipping</span>
+            <div>
+              <div class="pricing-card-service">Large Delivery / Removal</div>
+              <div class="pricing-card-price">From <strong>R 800</strong></div>
+            </div>
+          </div>
+          <div class="pricing-card">
+            <span class="material-icons-round">delete_sweep</span>
+            <div>
+              <div class="pricing-card-service">Refuse Removal (small load)</div>
+              <div class="pricing-card-price">From <strong>R 350</strong></div>
+            </div>
+          </div>
+          <div class="pricing-card">
+            <span class="material-icons-round">home_work</span>
+            <div>
+              <div class="pricing-card-service">Full Relocation</div>
+              <div class="pricing-card-price">From <strong>R 1 500</strong></div>
+            </div>
+          </div>
+        </div>
+        <p style="text-align:center;font-size:13px;color:var(--color-text-muted);margin-top:12px">
+          Prices are estimates. Contact us for an exact quote.
+        </p>
+      </div>
+    </section>
+
+    <footer class="footer-bar">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav__logo"><span class="material-icons-round" style="color:var(--color-accent)">local_shipping</span> Mbatha Logistics</div>
+          <p>Professional logistics services across KwaZulu-Natal.</p>
+        </div>
+        <div class="footer-links">
+          <strong>Services</strong>
+          <a href="#">Deliveries</a><a href="#">Removals</a><a href="#">Refuse Removal</a>
+        </div>
+        <div class="footer-links">
+          <strong>Contact</strong>
+          <a href="#">0625596239</a><a href="#">WhatsApp</a><a href="#">info@mbathalogistics.co.za</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Mbatha Logistics. All rights reserved.</span>
+        <a href="#" style="color:rgba(255,255,255,.25)">Admin</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ======================================================
+       SCREEN 2 — BOOKING FORM
+       ====================================================== -->
+  <div id="s-booking" class="screen">
+    <div class="booking-page-wrap">
+      <div class="booking-hdr">
+        <div class="booking-hdr-inner">
+          <div class="back-lnk"><span class="material-icons-round">arrow_back</span> Back to Home</div>
+          <div class="nav__logo"><span class="material-icons-round" style="color:var(--color-accent)">local_shipping</span> Mbatha Logistics</div>
+        </div>
+      </div>
+      <div class="booking-body">
+        <div class="booking-form-col">
+          <div class="booking-form-hdr">
+            <h1>Book a Service</h1>
+            <p>Fill in the details below and we'll confirm your booking shortly.</p>
+          </div>
+          <fieldset class="form-section">
+            <legend><span class="material-icons-round">person</span> Your Details</legend>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name *</label>
+                <input class="form-control" placeholder="Sipho Dlamini" value="Thandiwe Zulu" />
+              </div>
+              <div class="form-group">
+                <label>Phone Number *</label>
+                <input class="form-control" placeholder="071 000 0000" value="082 456 7890" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email (optional)</label>
+              <input class="form-control" placeholder="sipho@example.com" />
+            </div>
+          </fieldset>
+          <fieldset class="form-section">
+            <legend><span class="material-icons-round">category</span> Service Details</legend>
+            <div class="form-group">
+              <label>Service Type *</label>
+              <select class="form-control">
+                <option>Furniture Removals</option>
+                <option>Deliveries</option>
+                <option>Refuse Removal</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Pickup Address *</label>
+              <div class="input-icon-wrap">
+                <span class="material-icons-round i-icon">location_on</span>
+                <input class="form-control" value="12 Smith Street, Berea, Durban" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Drop-off Address</label>
+              <div class="input-icon-wrap">
+                <span class="material-icons-round i-icon">flag</span>
+                <input class="form-control" value="45 Main Road, Pinetown" />
+              </div>
+            </div>
+            <div style="display:inline-flex;align-items:center;gap:6px;background:var(--color-accent-light);color:var(--color-accent-dark);padding:8px 14px;border-radius:var(--radius-md);font-size:13px;font-weight:600;border:1px solid rgba(232,168,56,.3)">
+              <span class="material-icons-round" style="font-size:16px">straighten</span>
+              Estimated distance: <strong>18 km</strong>
+            </div>
+            <div class="form-group">
+              <label>Preferred Date & Time *</label>
+              <input class="form-control" type="datetime-local" value="2025-06-20T09:00" />
+            </div>
+            <div class="form-group">
+              <label>Description / Notes</label>
+              <textarea class="form-control" rows="3" placeholder="Any special instructions...">3-bedroom house, some fragile items, access via side gate.</textarea>
+            </div>
+          </fieldset>
+          <fieldset class="form-section">
+            <legend><span class="material-icons-round">photo_library</span> Photos (optional)</legend>
+            <p style="font-size:13px;color:var(--color-text-muted)">Upload up to 8 photos of items to be moved or collected.</p>
+            <div class="upload-zone">
+              <span class="material-icons-round">cloud_upload</span>
+              <p>Click to add photos</p>
+              <small>JPG, PNG — max 8 images</small>
+            </div>
+          </fieldset>
+          <button class="btn btn-accent btn-lg btn-block">
+            <span class="material-icons-round">send</span>
+            Submit Booking
+          </button>
+        </div>
+
+        <aside style="display:flex;flex-direction:column;gap:14px;position:sticky;top:80px">
+          <div class="sidebar-card">
+            <h3><span class="material-icons-round">info</span> What happens next?</h3>
+            <div class="sidebar-steps">
+              <div class="sidebar-step"><div class="step-dot">1</div><p>Your booking is saved and our team is notified.</p></div>
+              <div class="sidebar-step"><div class="step-dot">2</div><p>We'll contact you to confirm the details and price.</p></div>
+              <div class="sidebar-step"><div class="step-dot">3</div><p>A driver is assigned and your job is on the way!</p></div>
+            </div>
+          </div>
+          <div class="sidebar-card" style="background:var(--color-surface-2)">
+            <h4 style="margin-bottom:6px;font-size:14px">Prefer to call?</h4>
+            <p style="font-size:13px;color:var(--color-text-muted);margin-bottom:12px">Reach us directly — 7 days a week.</p>
+            <button class="btn btn-outline btn-block"><span class="material-icons-round">call</span> 0625596239</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SCREEN 3 — CONFIRMATION
+       ====================================================== -->
+  <div id="s-confirm" class="screen">
+    <div class="confirm-wrap">
+      <div class="confirm-card">
+        <div class="confirm-card-hdr">
+          <div class="confirm-icon-circle">
+            <span class="material-icons-round">check_circle</span>
+          </div>
+          <h1>Booking Received!</h1>
+          <p>Thank you, <strong style="color:white">Thandiwe Zulu</strong>. We've received your booking and will be in touch shortly.</p>
+          <div class="confirm-ref">
+            <span class="material-icons-round" style="font-size:13px">tag</span>
+            Ref: <strong>3F9A82C1</strong>
+          </div>
+        </div>
+        <div class="confirm-card-body">
+          <h3>Booking Summary</h3>
+          <div class="summary-grid">
+            <div class="sum-item">
+              <span class="sum-label">Service</span>
+              <span class="sum-value">Furniture Removals</span>
+            </div>
+            <div class="sum-item">
+              <span class="sum-label">Status</span>
+              <span class="badge badge-pending">Pending</span>
+            </div>
+            <div class="sum-item" style="grid-column:1/-1">
+              <span class="sum-label">Pickup</span>
+              <span class="sum-value">12 Smith Street, Berea, Durban</span>
+            </div>
+            <div class="sum-item" style="grid-column:1/-1">
+              <span class="sum-label">Drop-off</span>
+              <span class="sum-value">45 Main Road, Pinetown</span>
+            </div>
+            <div class="sum-item">
+              <span class="sum-label">Date & Time</span>
+              <span class="sum-value">Friday, 20 June 2025, 09:00</span>
+            </div>
+            <div class="sum-item">
+              <span class="sum-label">Est. Distance</span>
+              <span class="sum-value">18 km</span>
+            </div>
+          </div>
+        </div>
+        <div class="confirm-card-footer">
+          <button class="btn btn-accent btn-lg">
+            <span class="material-icons-round">chat</span> Contact via WhatsApp
+          </button>
+          <button class="btn btn-outline btn-lg">
+            <span class="material-icons-round">home</span> Back to Home
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SCREEN 4 — ADMIN LOGIN
+       ====================================================== -->
+  <div id="s-login" class="screen">
+    <div class="login-wrap">
+      <div class="login-left-panel">
+        <div class="login-left-brand">
+          <span class="material-icons-round">local_shipping</span>
+          Mbatha Logistics
+        </div>
+        <div class="login-visual-area">
+          <div class="login-visual-card">
+            <span class="material-icons-round">check_circle</span>
+            <div><strong>All jobs synced</strong><small>Real-time updates</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="login-right-panel">
+        <div class="login-box">
+          <div class="login-box-hdr">
+            <h1>Admin Portal</h1>
+            <p>Sign in to manage bookings and jobs.</p>
+          </div>
+          <div class="login-form">
+            <div class="form-group">
+              <label>Email Address</label>
+              <input class="form-control" type="email" value="admin@mbathalogistics.co.za" />
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <div style="position:relative">
+                <input class="form-control" type="password" value="••••••••••" style="padding-right:44px" />
+                <span class="material-icons-round" style="position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:19px;color:var(--color-text-light);cursor:pointer">visibility</span>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block">
+              <span class="material-icons-round">login</span> Sign In
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SCREEN 5 — ADMIN DASHBOARD
+       ====================================================== -->
+  <div id="s-dashboard" class="screen">
+    <div class="admin-wrap">
+      <aside class="sidebar">
+        <div class="sidebar-hdr">
+          <div class="sidebar-logo"><span class="material-icons-round">local_shipping</span> Mbatha</div>
+        </div>
+        <nav class="sidebar-nav">
+          <div class="nav-item active"><span class="material-icons-round">dashboard</span> Dashboard</div>
+          <div class="nav-item"><span class="material-icons-round">work</span> Jobs</div>
+          <div class="nav-item"><span class="material-icons-round">settings</span> Settings</div>
+        </nav>
+        <div class="sidebar-foot">
+          <div class="nav-item" style="color:rgba(255,255,255,.4)"><span class="material-icons-round">logout</span> Sign out</div>
+        </div>
+      </aside>
+      <div class="admin-main">
+        <div class="topbar">
+          <div class="topbar-left">
+            <span class="breadcrumb">Admin Portal</span>
+          </div>
+          <div class="topbar-right">
+            <button class="btn btn-ghost btn-sm" style="font-size:13px">
+              <span class="material-icons-round" style="font-size:15px">open_in_new</span> View Site
+            </button>
+            <div class="user-chip">
+              <div class="user-avatar">A</div>
+              <span class="user-email">admin@mbathalogistics.co.za</span>
+            </div>
+          </div>
+        </div>
+        <div class="page-content">
+          <div class="page-hdr">
+            <div><h1>Dashboard</h1><p>Overview of all logistics jobs.</p></div>
+            <button class="btn btn-accent"><span class="material-icons-round">add</span> New Booking</button>
+          </div>
+          <div class="stats-row">
+            <div class="stat-card"><div class="stat-ic stat-ic-total"><span class="material-icons-round">work</span></div><div><div class="stat-val">47</div><div class="stat-lbl">Total Jobs</div></div></div>
+            <div class="stat-card"><div class="stat-ic stat-ic-pending"><span class="material-icons-round">hourglass_empty</span></div><div><div class="stat-val">12</div><div class="stat-lbl">Pending</div></div></div>
+            <div class="stat-card"><div class="stat-ic stat-ic-assigned"><span class="material-icons-round">local_shipping</span></div><div><div class="stat-val">8</div><div class="stat-lbl">In Progress</div></div></div>
+            <div class="stat-card"><div class="stat-ic stat-ic-done"><span class="material-icons-round">check_circle</span></div><div><div class="stat-val">27</div><div class="stat-lbl">Completed</div></div></div>
+          </div>
+          <div class="table-card">
+            <div class="table-card-hdr">
+              <h2>Recent Jobs</h2>
+              <button class="btn btn-ghost btn-sm">View all <span class="material-icons-round" style="font-size:15px">arrow_forward</span></button>
+            </div>
+            <table>
+              <thead><tr><th>Customer</th><th>Service</th><th>Pickup</th><th>Date</th><th>Status</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="cust-cell"><div class="cust-av">T</div><div><div class="cust-name">Thandiwe Zulu</div><div class="cust-phone">082 456 7890</div></div></div></td>
+                  <td><span class="svc-chip">Furniture Removals</span></td>
+                  <td style="color:var(--color-text-muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">12 Smith St, Berea</td>
+                  <td style="color:var(--color-text-muted);font-size:12px">20 Jun 2025</td>
+                  <td><span class="badge badge-pending">Pending</span></td>
+                  <td><button class="btn btn-outline btn-sm"><span class="material-icons-round" style="font-size:14px">visibility</span> View</button></td>
+                </tr>
+                <tr>
+                  <td><div class="cust-cell"><div class="cust-av">S</div><div><div class="cust-name">Sipho Ndlovu</div><div class="cust-phone">071 234 5678</div></div></div></td>
+                  <td><span class="svc-chip">Deliveries</span></td>
+                  <td style="color:var(--color-text-muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">88 West St, Durban CBD</td>
+                  <td style="color:var(--color-text-muted);font-size:12px">19 Jun 2025</td>
+                  <td><span class="badge badge-assigned">Assigned</span></td>
+                  <td><button class="btn btn-outline btn-sm"><span class="material-icons-round" style="font-size:14px">visibility</span> View</button></td>
+                </tr>
+                <tr>
+                  <td><div class="cust-cell"><div class="cust-av">N</div><div><div class="cust-name">Nokwanda Mthembu</div><div class="cust-phone">083 876 5432</div></div></div></td>
+                  <td><span class="svc-chip">Refuse Removal</span></td>
+                  <td style="color:var(--color-text-muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">5 Palm Ave, Glenwood</td>
+                  <td style="color:var(--color-text-muted);font-size:12px">18 Jun 2025</td>
+                  <td><span class="badge badge-completed">Completed</span></td>
+                  <td><button class="btn btn-outline btn-sm"><span class="material-icons-round" style="font-size:14px">visibility</span> View</button></td>
+                </tr>
+                <tr>
+                  <td><div class="cust-cell"><div class="cust-av">B</div><div><div class="cust-name">Bongani Dube</div><div class="cust-phone">064 111 2233</div></div></div></td>
+                  <td><span class="svc-chip">Relocation</span></td>
+                  <td style="color:var(--color-text-muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">32 Ridge Rd, Morningside</td>
+                  <td style="color:var(--color-text-muted);font-size:12px">17 Jun 2025</td>
+                  <td><span class="badge badge-assigned">Assigned</span></td>
+                  <td><button class="btn btn-outline btn-sm"><span class="material-icons-round" style="font-size:14px">visibility</span> View</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       SCREEN 6 — JOB DETAIL
+       ====================================================== -->
+  <div id="s-jobdetail" class="screen">
+    <div class="admin-wrap">
+      <aside class="sidebar">
+        <div class="sidebar-hdr">
+          <div class="sidebar-logo"><span class="material-icons-round">local_shipping</span> Mbatha</div>
+        </div>
+        <nav class="sidebar-nav">
+          <div class="nav-item"><span class="material-icons-round">dashboard</span> Dashboard</div>
+          <div class="nav-item active"><span class="material-icons-round">work</span> Jobs</div>
+          <div class="nav-item"><span class="material-icons-round">settings</span> Settings</div>
+        </nav>
+        <div class="sidebar-foot">
+          <div class="nav-item" style="color:rgba(255,255,255,.4)"><span class="material-icons-round">logout</span> Sign out</div>
+        </div>
+      </aside>
+      <div class="admin-main">
+        <div class="topbar">
+          <div class="topbar-left">
+            <span class="breadcrumb">Jobs → Job #3F9A82C1</span>
+          </div>
+          <div class="topbar-right">
+            <button class="btn btn-outline btn-sm"><span class="material-icons-round" style="font-size:15px">chat</span> WhatsApp Customer</button>
+            <button class="btn btn-sm" style="background:#fef2f2;color:#991b1b;border-radius:var(--radius-full)"><span class="material-icons-round" style="font-size:15px">delete_outline</span> Delete</button>
+          </div>
+        </div>
+        <div class="page-content">
+          <div style="margin-bottom:20px">
+            <div style="font-size:13px;color:var(--color-text-muted);margin-bottom:6px">← All Jobs</div>
+            <h1 style="font-size:1.5rem;font-family:var(--font-display)">Job #3F9A82C1</h1>
+            <p style="font-size:12px;color:var(--color-text-muted)">Created 2 hours ago</p>
+          </div>
+
+          <div class="detail-layout">
+            <div class="detail-main">
+              <div class="d-card">
+                <div class="d-card-hdr"><span class="material-icons-round">person</span> Customer Information</div>
+                <div class="d-grid">
+                  <div class="d-item"><div class="d-label">Name</div><div class="d-value">Thandiwe Zulu</div></div>
+                  <div class="d-item"><div class="d-label">Phone</div><div class="d-value" style="color:var(--color-primary);font-weight:600;text-decoration:underline">082 456 7890</div></div>
+                  <div class="d-item" style="grid-column:1/-1;border-bottom:none"><div class="d-label">Email</div><div class="d-value">—</div></div>
+                </div>
+              </div>
+              <div class="d-card">
+                <div class="d-card-hdr"><span class="material-icons-round">local_shipping</span> Job Details</div>
+                <div class="d-grid">
+                  <div class="d-item"><div class="d-label">Service Type</div><div class="d-value"><span class="svc-chip">Furniture Removals</span></div></div>
+                  <div class="d-item"><div class="d-label">Date & Time</div><div class="d-value">Friday, 20 June 2025, 09:00</div></div>
+                  <div class="d-item" style="grid-column:1/-1"><div class="d-label">Pickup Address</div><div class="d-value">12 Smith Street, Berea, Durban, 4001</div></div>
+                  <div class="d-item" style="grid-column:1/-1"><div class="d-label">Drop-off Address</div><div class="d-value">45 Main Road, Pinetown, 3610</div></div>
+                  <div class="d-item"><div class="d-label">Est. Distance</div><div class="d-value">18 km</div></div>
+                  <div class="d-item" style="border-bottom:none"><div class="d-label">Notes</div><div class="d-value" style="font-style:italic;color:var(--color-text-muted);font-size:13px">3-bedroom house, some fragile items, access via side gate.</div></div>
+                </div>
+              </div>
+              <div class="d-card">
+                <div class="d-card-hdr"><span class="material-icons-round">photo_library</span> Uploaded Photos (3)</div>
+                <div class="photo-thumb-row">
+                  <div class="photo-thumb-item" style="background:#e8f4ec"><span class="material-icons-round" style="color:#4ade80">image</span></div>
+                  <div class="photo-thumb-item" style="background:#f0f4ff"><span class="material-icons-round" style="color:#6366f1">image</span></div>
+                  <div class="photo-thumb-item" style="background:#fdf3dc"><span class="material-icons-round" style="color:var(--color-accent)">image</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail-sidebar-col">
+              <div class="d-card">
+                <div class="d-card-hdr"><span class="material-icons-round">edit</span> Update Job</div>
+                <div class="action-form-pad">
+                  <div class="form-group" style="margin-bottom:4px">
+                    <label>Status</label>
+                  </div>
+                  <div class="status-options">
+                    <div class="status-opt sel"><span class="badge badge-pending">Pending</span></div>
+                    <div class="status-opt"><span class="badge badge-assigned">Assigned</span></div>
+                    <div class="status-opt"><span class="badge badge-completed">Completed</span></div>
+                    <div class="status-opt"><span class="badge badge-cancelled">Cancelled</span></div>
+                  </div>
+                  <div class="form-group" style="margin-top:8px">
+                    <label>Assigned Driver</label>
+                    <input class="form-control" placeholder="Driver name or phone..." />
+                  </div>
+                  <button class="btn btn-primary btn-block"><span class="material-icons-round">save</span> Save Changes</button>
+                </div>
+              </div>
+              <div class="d-card" style="padding:18px;display:flex;flex-direction:column;gap:9px">
+                <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--color-text-light)">Current Status</p>
+                <span class="badge badge-pending" style="font-size:13px;padding:7px 14px">Pending</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+  const map = {
+    landing:'s-landing', booking:'s-booking', confirm:'s-confirm',
+    login:'s-login', dashboard:'s-dashboard', jobdetail:'s-jobdetail'
+  };
+  document.getElementById(map[name]).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>
