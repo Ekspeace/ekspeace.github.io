@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email Verified — SnapSolve AI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #F8F8FF;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 48px 40px 40px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(108, 99, 255, 0.10);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #6C63FF, #9C94FF);
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1A1A2E;
+      letter-spacing: -0.3px;
+    }
+
+    .success-ring {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6C63FF, #9C94FF);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      box-shadow: 0 12px 32px rgba(108, 99, 255, 0.35);
+      animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes pop {
+      0%   { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1);   opacity: 1; }
+    }
+
+    .check {
+      width: 40px;
+      height: 40px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1A1A2E;
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #6B7280;
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+
+    .highlight {
+      color: #6C63FF;
+      font-weight: 600;
+    }
+
+    .open-btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #6C63FF, #9C94FF);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.1px;
+      transition: opacity 0.2s;
+      margin-bottom: 12px;
+    }
+
+    .open-btn:hover { opacity: 0.9; }
+
+    .store-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .store-btn {
+      flex: 1;
+      padding: 13px 10px;
+      border: 1.5px solid #E5E5F0;
+      border-radius: 12px;
+      color: #1A1A2E;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: border-color 0.2s;
+    }
+
+    .store-btn:hover { border-color: #6C63FF; }
+
+    .store-icon { font-size: 18px; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #E5E5F0;
+      margin-bottom: 20px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .feature {
+      background: #F0EFFF;
+      border-radius: 12px;
+      padding: 12px 10px;
+      font-size: 12px;
+      color: #4B44CC;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .feature-icon { font-size: 16px; }
+
+    .footer {
+      font-size: 12px;
+      color: #9CA3AF;
+    }
+
+    .footer a {
+      color: #6C63FF;
+      text-decoration: none;
+    }
+
+    /* Countdown timer */
+    .redirect-note {
+      font-size: 13px;
+      color: #9CA3AF;
+      margin-bottom: 20px;
+    }
+
+    #countdown { color: #6C63FF; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+
+    <!-- Brand -->
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <span class="brand-name">SnapSolve AI</span>
+    </div>
+
+    <!-- Success icon -->
+    <div class="success-ring">
+      <svg class="check" viewBox="0 0 24 24" fill="none">
+        <path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1>Email verified! 🎉</h1>
+    <p class="subtitle">
+      Your <span class="highlight">SnapSolve AI</span> account is now active.
+      Open the app to start solving homework questions instantly.
+    </p>
+
+    <!-- Open app deeplink -->
+    <a href="io.supabase.snapsolve://login-callback" class="open-btn">
+      Open SnapSolve AI
+    </a>
+
+    <!-- Store download links -->
+    <div class="store-row">
+      <a href="https://play.google.com/store/apps/details?id=com.ekspeace.snapsolve"
+         class="store-btn" target="_blank">
+        <span class="store-icon">▶</span> Google Play
+      </a>
+      <a href="#" class="store-btn">
+        <span class="store-icon">🍎</span> App Store
+      </a>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Feature highlights -->
+    <div class="features">
+      <div class="feature"><span class="feature-icon">📸</span>Scan homework</div>
+      <div class="feature"><span class="feature-icon">🧠</span>AI explanations</div>
+      <div class="feature"><span class="feature-icon">📝</span>Step-by-step</div>
+      <div class="feature"><span class="feature-icon">💬</span>AI Tutor chat</div>
+    </div>
+
+    <!-- Redirect note -->
+    <p class="redirect-note">
+      Redirecting to the app in <span id="countdown">5</span>s…
+    </p>
+
+    <div class="footer">
+      © 2026 Eks · SnapSolve AI ·
+      <a href="mailto:ekspeace@gmail.com">ekspeace@gmail.com</a>
+    </div>
+
+  </div>
+
+  <script>
+    // Auto-redirect countdown
+    let seconds = 5;
+    const el = document.getElementById('countdown');
+    const interval = setInterval(() => {
+      seconds--;
+      if (el) el.textContent = seconds;
+      if (seconds <= 0) {
+        clearInterval(interval);
+        // Try deeplink first, fallback to Play Store
+        window.location.href = 'io.supabase.snapsolve://login-callback';
+        setTimeout(() => {
+          window.location.href =
+            'https://play.google.com/store/apps/details?id=com.ekspeace.snapsolve';
+        }, 1500);
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
