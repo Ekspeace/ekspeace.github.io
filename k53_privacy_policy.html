@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <title>Privacy Policy - K53 Ace</title>
+  <meta name="description" content="Privacy policy for the K53 Ace learner's licence app by Eks." />
+  <style>
+    :root {
+      --charcoal: #1c1e21;
+      --asphalt: #2b2e33;
+      --yellow: #ffc400;
+      --orange: #ff6a00;
+      --ink: #22252a;
+      --muted: #5c636e;
+      --line: #e6e8ec;
+      --bg: #f6f7f9;
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+    }
+    .banner {
+      background: var(--charcoal);
+      color: #fff;
+      padding: 36px 20px;
+      border-bottom: 4px solid var(--yellow);
+    }
+    .banner-inner { max-width: 760px; margin: 0 auto; }
+    .brand {
+      display: inline-block;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--charcoal);
+      background: var(--yellow);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+    h1 { margin: 0; font-size: 28px; line-height: 1.25; }
+    .updated { margin-top: 8px; color: #b9bec7; font-size: 14px; }
+    main {
+      max-width: 760px;
+      margin: -24px auto 48px;
+      padding: 0 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px clamp(18px, 4vw, 36px);
+      box-shadow: 0 6px 24px rgba(20, 22, 26, 0.06);
+    }
+    h2 {
+      font-size: 20px;
+      margin: 32px 0 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+    h2:first-of-type { border-top: none; padding-top: 0; margin-top: 8px; }
+    h3 { font-size: 16px; margin: 20px 0 4px; color: var(--orange); }
+    p { margin: 8px 0; }
+    a { color: #0a58ca; word-break: break-word; }
+    .lead { font-size: 17px; color: var(--muted); }
+    .note {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: #fff8e1;
+      border-left: 4px solid var(--yellow);
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    footer {
+      max-width: 760px;
+      margin: 0 auto 40px;
+      padding: 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #17191c; --card: #212429; --ink: #e7e9ec; --muted: #9aa1ab; --line: #30343a; }
+      a { color: #6ea8ff; }
+      .note { background: #2a2712; }
+    }
+  </style>
+</head>
+<body>
+  <header class="banner">
+    <div class="banner-inner">
+      <span class="brand">K53 ACE</span>
+      <h1>Privacy Policy</h1>
+      <div class="updated">Last updated: 1 July 2026</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <p class="lead">
+        K53 Ace (&ldquo;the app&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) is published by
+        <strong>Eks</strong>. This policy explains what data the app collects, why, and
+        your choices. Contact: <strong><a href="mailto:Ekspeace@gmail.com">Ekspeace@gmail.com</a></strong>.
+      </p>
+
+      <h2>Summary</h2>
+      <p>
+        K53 Ace is offline-first. Your quiz questions and progress stay on your device.
+        The app uses two third-party services that may process limited data: an AI
+        &ldquo;Coach&rdquo; (to explain wrong answers) and Google AdMob (to show ads).
+      </p>
+
+      <h2>What we collect and why</h2>
+
+      <h3>1. Learning data (stored on your device)</h3>
+      <p>
+        Your selected licence type, quiz answers, scores, study streak, and progress are
+        stored <strong>locally on your device</strong> and are not sent to us. Uninstalling
+        the app removes them.
+      </p>
+
+      <h3>2. AI Coach (optional feature)</h3>
+      <p>
+        When you tap &ldquo;Review Mistake with AI Coach&rdquo; or &ldquo;Get AI Study
+        Plan&rdquo;, the app sends the relevant <strong>question text, the answer options,
+        the correct answer, and your selected answer</strong> to our secure backend
+        (Supabase Edge Function), which forwards it to our AI provider
+        (<strong>OpenAI</strong>) to generate an explanation. We do <strong>not</strong> send
+        your name, email, contacts, or device identifiers with these requests.
+      </p>
+      <p class="note">Do not enter personal information into the app.</p>
+      <p>
+        See OpenAI's policy at
+        <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">openai.com/policies/privacy-policy</a>
+        and Supabase's at
+        <a href="https://supabase.com/privacy" target="_blank" rel="noopener">supabase.com/privacy</a>.
+      </p>
+
+      <h3>3. Advertising (Google AdMob)</h3>
+      <p>
+        The app shows banner, interstitial, and rewarded ads via <strong>Google AdMob</strong>.
+        To serve ads, Google may collect and process device information and identifiers
+        (e.g., advertising ID) as described in Google's policy:
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>
+        and
+        <a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener">Google's advertising partners list</a>.
+      </p>
+      <p>
+        <strong>Consent.</strong> Where required (e.g., EEA/UK), we present a
+        Google-certified consent message (Google UMP) before serving personalised ads. You
+        can change your choice any time via <strong>&ldquo;Ad choices&rdquo;</strong> in the
+        app. Where consent is not granted, ads are limited or not shown.
+      </p>
+
+      <h2>Children</h2>
+      <p>
+        K53 Ace is intended for users old enough to apply for a learner's licence. It is not
+        directed at children under 13.
+      </p>
+
+      <h2>Data retention</h2>
+      <p>
+        Learning data persists on your device until you clear it or uninstall. AI Coach
+        request/response content is processed transiently to generate a reply and is not
+        stored by us for profiling.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        Depending on your region (e.g., POPIA in South Africa, GDPR in the EEA/UK), you may
+        have rights to access, correct, or delete personal data, and to withdraw ad consent.
+        Contact <strong><a href="mailto:Ekspeace@gmail.com">Ekspeace@gmail.com</a></strong>.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        We may update this policy; the &ldquo;Last updated&rdquo; date will change accordingly.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 Eks &middot; K53 Ace
+  </footer>
+</body>
+</html>
