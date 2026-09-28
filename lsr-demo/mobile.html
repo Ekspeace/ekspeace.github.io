@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LSR Services Group: mobile views | Demonstration</title>
+<meta name="description" content="The proposed LSR website on a phone: home with a fixed call button, and the six-field enquiry form.">
+<meta property="og:title" content="LSR Services Group: mobile views | Demonstration">
+<meta property="og:description" content="The proposed LSR website on a phone: home with a fixed call button, and the six-field enquiry form.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="kit.js"></script>
+<style>
+.mob{flex:1;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.mbar{background:var(--ink);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:10px;flex:none}
+.mbar img{height:22px}
+.mcall{display:flex;background:var(--acc);color:var(--ink);font-weight:700;font-size:13px;padding:9px;justify-content:center;gap:8px;align-items:center;flex:none}
+.mhero{position:relative;height:185px;flex:none}
+.mhero img{width:100%;height:100%;object-fit:cover}
+.mhero .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,38,84,.35),rgba(16,38,84,.92))}
+.mhero .tx{position:absolute;left:14px;right:14px;bottom:12px;color:#fff}
+.sec{padding:15px 14px}
+.b2{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--acc);color:var(--ink);border-radius:9px;padding:12px;font-weight:700;font-size:14px}
+.b2.navy{background:var(--ink);color:#fff}
+.stickybar{position:absolute;left:0;right:0;bottom:0;display:flex;gap:8px;padding:9px 12px;background:rgba(255,255,255,.97);border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div id="app" class="phones"></div>
+<script>
+const S = {};
+
+S.home = () => phone('Home on a phone: call button always in reach', `
+  <div class="mob" style="position:relative">
+    <div class="mbar"><img src="assets/logo-white.png" alt="LSR"><span style="flex:1"></span>${ic('menu', 22)}</div>
+    <div class="mcall">${ic('phone', 15)} Call 020 8073 0151 &middot; 24/7</div>
+    <div class="mhero"><img src="assets/team-agent.jpg" alt=""><div class="sh"></div>
+      <div class="tx"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--acc)">FULLY MANAGED MAINTENANCE</div>
+        <div style="font-size:19px;font-weight:800;line-height:1.15;margin-top:5px">Maintenance handled end to end, without the admin</div></div></div>
+    <div class="scroll" style="overflow:hidden">
+      <div class="sec">
+        <div class="b2">Get a fixed quote ${ic('arrow', 15)}</div>
+        <div class="row" style="gap:6px;margin-top:9px;justify-content:center">${['24/7 desk', '1 hr replies', 'Fixed prices'].map((t) => `<span class="pill acc" style="font-size:10.5px">${ic('check', 11)} ${t}</span>`).join('')}</div>
+      </div>
+      <div class="sec" style="background:var(--bg)"><div class="lab">What do you need?</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+          ${[['wrench2', 'Reactive repairs'], ['droplet2', 'Damp &amp; mould'], ['plug', 'Electrical'], ['flame2', 'Gas &amp; heating']].map(([i, t]) =>
+            `<div class="card" style="margin:0;padding:12px 10px;text-align:center"><span style="color:var(--accD)">${ic(i, 20)}</span><div class="xs b" style="margin-top:5px">${t}</div></div>`).join('')}</div>
+        <div class="xs b" style="color:var(--accD);text-align:center;margin-top:10px">See all 9 services ${ic('arrow', 11)}</div></div>
+      <div class="sec"><div class="lab">Trusted by letting agents</div>
+        <div class="row" style="gap:10px;margin-top:8px;flex-wrap:wrap">${['kirkland', 'olive', 'bradleys'].map((p) => `<img src="assets/partner-${p}.png" style="height:22px;opacity:.7;filter:grayscale(1)" alt="">`).join('')}</div></div>
+    </div>
+    <div class="stickybar"><span class="b2" style="flex:1;padding:10px;font-size:13px">${ic('phone', 14)} Call</span><span class="b2 navy" style="flex:1;padding:10px;font-size:13px">${ic('chat', 14)} Get a quote</span></div>
+  </div>`, { light: false, time: '08:41' });
+
+S.form = () => phone('The enquiry form, built for thumbs', `
+  <div class="mob" style="position:relative">
+    <div class="mbar">${ic('back', 20)}<span class="b" style="font-size:15px">Get a fixed quote</span></div>
+    <div class="scroll" style="padding:14px;background:var(--bg);overflow:hidden">
+      <div class="card" style="margin:0"><div class="lab">I am a</div>
+        <div style="display:flex;gap:6px;margin-top:6px">${['Letting agent', 'Landlord', 'Homeowner'].map((t, i) => `<span class="pill ${i === 2 ? 'acc' : 'mut'}" style="flex:1;justify-content:center;padding:9px;font-size:11px">${t}</span>`).join('')}</div>
+        <div class="lab" style="margin-top:11px">Name</div><div class="fld"><div class="v sm2">M. Osei</div></div>
+        <div class="lab" style="margin-top:9px">Phone</div><div class="fld"><div class="v sm2">07700 900 244</div></div>
+        <div class="lab" style="margin-top:9px">Postcode</div><div class="fld"><div class="v sm2">N1 7GU</div></div>
+        <div class="lab" style="margin-top:9px">What needs doing?</div><div class="fld"><div class="v sm2">Consumer unit replacement quote</div></div>
+        <div class="lab" style="margin-top:9px">Photos (optional)</div>
+        <div style="border:1.5px dashed var(--line);border-radius:10px;padding:14px;text-align:center;margin-top:6px;color:var(--muted)">${ic('camera', 20)}<div class="xs">Add a photo of the problem</div></div>
+      </div>
+      <div class="card" style="background:var(--accL);border-color:#EDD9AF"><div class="xs"><span class="b">Six fields, no budget question.</span> The rest is asked on the call, which is what gets the form finished on a phone.</div></div>
+    </div>
+    <div class="stickybar"><span class="b2" style="flex:1">Send enquiry ${ic('arrow', 14)}</span></div>
+  </div>`, { light: false, time: '08:43' });
+
+const order = ['home', 'form'];
+const only = screenFromUrl(null);
+document.getElementById('app').innerHTML = (only && S[only] ? [only] : order).map((k) => S[k]()).join('');
+wireNav({});
+</script>
+</body>
+</html>

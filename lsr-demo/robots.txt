@@ -1,0 +1,3 @@
+# Demonstration built for a job application. Not for indexing.
+User-agent: *
+Disallow: /

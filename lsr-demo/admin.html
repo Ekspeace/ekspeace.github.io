@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LSR Services Group: content admin | Demonstration</title>
+<meta name="description" content="How the LSR team would edit the site: pages with search settings, a live preview editor, the enquiry inbox and conversion tracking.">
+<meta property="og:title" content="LSR Services Group: content admin | Demonstration">
+<meta property="og:description" content="How the LSR team would edit the site: pages with search settings, a live preview editor, the enquiry inbox and conversion tracking.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="kit.js"></script>
+<style>body{padding:30px 0 60px}</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const URL_BASE = 'lsrservicesgroup.co.uk/admin/';
+const user = `<div class="row" style="gap:9px"><span class="pill acc">${ic('check', 12)} All changes saved</span>
+  <div class="av" style="background:var(--ink)">LS</div><div class="xs"><div class="b">LSR office</div><div class="muted">Editor</div></div></div>`;
+const D = (side, title, sub, content) => desktop(URL_BASE + side, sideNav(side), title, sub, content, { topright: user });
+const sp = (s, t) => `<span class="pill ${s}">${t}</span>`;
+const kpi = (l, n, d) => `<div class="kpi"><div class="lab">${l}</div><div class="n">${n}</div><div class="d">${d}</div></div>`;
+
+const S = {};
+
+S.pages = () => D('pages', 'Pages', 'Edit any page yourself. Changes go live when you publish, and you can preview first.', `
+  <div class="row sb" style="margin-bottom:12px"><div class="row" style="gap:7px">${['All (24)', 'Services (9)', 'Sectors (5)', 'Landing pages (3)', 'Drafts (2)'].map((t, i) => `<span class="pill ${i === 0 ? 'dark' : 'mut'}" style="padding:7px 12px">${t}</span>`).join('')}</div>
+    <button class="btn sm">${ic('plus', 15)} New page</button></div>
+  <div class="tbl"><table><thead><tr><th>Page</th><th>Type</th><th>Page title (what Google shows)</th><th>Updated</th><th>Enquiries, 30 days</th><th>Status</th></tr></thead><tbody>
+    ${[['Home', 'Page', 'Property Maintenance London | Fully Managed | LSR Services Group', 'Today', '18', 'ok', 'Live'],
+       ['Damp and mould', 'Service', 'Damp &amp; Mould Specialists London | Reports &amp; Treatment | LSR', 'Today', '11', 'ok', 'Live'],
+       ['Electrical', 'Service', 'Electrical Contractors London | EICR &amp; Repairs | LSR Services', '2 days ago', '7', 'ok', 'Live'],
+       ['Gas and heating', 'Service', 'Gas Safe Engineers London | Boiler Repairs &amp; Servicing | LSR', '2 days ago', '9', 'ok', 'Live'],
+       ['Fire doors', 'Service', 'Fire Door Inspection &amp; Replacement London | FD30 | LSR', '1 week ago', '3', 'ok', 'Live'],
+       ['For letting agents', 'Sector', 'Property Maintenance for Letting Agents London | LSR Services', '1 week ago', '14', 'ok', 'Live'],
+       ['For homeowners', 'Sector', 'Home Repairs &amp; Maintenance London | Fixed Quotes | LSR', 'Draft', '—', 'warn', 'Draft'],
+       ['Out-of-hours desk', 'Landing', 'Out of Hours Maintenance Desk | 24/7 Tenant Calls | LSR', '3 days ago', '22', 'ok', 'Live']].map((r) =>
+      `<tr data-nav="editor"><td class="b">${r[0]}</td><td>${sp(r[1] === 'Service' ? 'acc' : r[1] === 'Sector' ? 'info' : r[1] === 'Landing' ? 'warn' : 'mut', r[1])}</td>
+       <td class="xs">${r[2]}</td><td class="xs muted">${r[3]}</td><td class="b">${r[4]}</td><td>${sp(r[5], r[6])}</td></tr>`).join('')}
+  </tbody></table></div>
+  <div class="panel" style="margin-top:14px"><div class="in row" style="gap:12px">${ic('search', 20)}<div class="sm2">
+    <span class="b">Every page has its own title, description and web address.</span> <span class="muted">That is what your SEO specialist needs, and what the current site is missing.</span></div></div></div>`);
+
+S.editor = () => D('pages', 'Damp and mould', 'Editing a service page. Preview on the right updates as you type.', `
+  <div class="gsb" style="grid-template-columns:1fr 470px">
+    <div>
+      <div class="panel"><h3>Page content</h3><div class="in">
+        <div class="lab">Heading</div><div class="fld"><div class="v">Damp and mould specialists in London</div></div>
+        <div class="lab" style="margin-top:12px">Intro</div><div class="fld"><div class="v sm2">Inspection, cause diagnosis, treatment and a written report with photographs, so you can evidence action under Awaab's Law.</div></div>
+        <div class="lab" style="margin-top:12px">Sections</div>
+        ${[['Steps', 'What we do on a damp and mould job, 5 steps', 'grid'], ['FAQs', '3 questions, shown to Google as FAQs', 'chat'], ['Case study', 'Damp traced to a failed gutter, Croydon', 'camera'], ['Areas covered', '6 London boroughs', 'pin']].map(([t, d, i]) =>
+          `<div class="row sb" style="padding:10px 0;border-bottom:1px solid #F1F3F5"><div class="row" style="gap:10px">${ic('dots', 14)}<span class="pill acc" style="padding:7px">${ic(i, 15)}</span>
+            <div><div class="sm2 b">${t}</div><div class="xs muted">${d}</div></div></div><div class="row" style="gap:10px;color:var(--muted)">${ic('eye', 15)}${ic('edit', 15)}</div></div>`).join('')}
+        <button class="btn sm ghost" style="margin-top:12px">${ic('plus', 14)} Add a section</button></div></div>
+      <div class="panel" style="margin-top:14px"><h3>Search settings</h3><div class="in">
+        <div class="lab">Page title</div><div class="fld"><div class="v sm2">Damp &amp; Mould Specialists London | Reports &amp; Treatment | LSR</div></div>
+        <div class="row sb xs muted" style="margin-top:4px"><span>Shown in Google results</span><span class="pill ok">58 of 60 characters</span></div>
+        <div class="lab" style="margin-top:12px">Description</div><div class="fld"><div class="v sm2">Damp and mould inspection, treatment and written reports across London. Fixed quotes, 48-hour inspections, Awaab's Law ready. Call 020 8073 0151.</div></div>
+        <div class="row sb xs muted" style="margin-top:4px"><span>The grey text under the title</span><span class="pill ok">146 of 155 characters</span></div>
+        <div class="lab" style="margin-top:12px">Web address</div><div class="fld"><div class="v sm2 muted">lsrservicesgroup.co.uk/services/<span style="color:var(--ink)">damp-and-mould-london</span></div></div></div></div>
+    </div>
+    <div>
+      <div class="panel"><h3>Live preview <span class="xs muted" style="font-weight:500">Desktop &middot; Mobile</span></h3>
+        <div style="padding:12px;background:var(--bg)">
+          <div style="background:#fff;border-radius:8px;overflow:hidden;border:1px solid var(--line)">
+            <div style="background:var(--ink);color:#fff;padding:10px 12px"><div class="xs" style="opacity:.6">Home &rsaquo; Services &rsaquo; Damp and mould</div>
+              <div class="b" style="font-size:15px;margin-top:5px">Damp and mould specialists in London</div>
+              <div class="xs" style="opacity:.78;margin-top:4px">Inspection, cause diagnosis, treatment and a written report with photographs.</div>
+              <span class="pill acc" style="margin-top:8px">Book a damp inspection</span></div>
+            <div style="padding:12px"><div class="xs b">What we do on a damp and mould job</div>
+              ${[1, 2, 3].map((i) => `<div class="row" style="gap:8px;margin-top:7px"><span class="av" style="width:18px;height:18px;font-size:9px;background:var(--acc);color:var(--ink)">${i}</span><div style="height:6px;background:#EEF0F3;border-radius:3px;flex:1"></div></div>`).join('')}</div></div></div></div>
+      <div class="panel" style="margin-top:14px"><h3>How it will look in Google</h3><div class="in">
+        <div style="border:1px solid var(--line);border-radius:8px;padding:12px">
+          <div class="xs muted">lsrservicesgroup.co.uk &rsaquo; services &rsaquo; damp-and-mould-london</div>
+          <div style="color:#1a0dab;font-size:15px;margin-top:2px">Damp &amp; Mould Specialists London | Reports &amp; Treatment | LSR</div>
+          <div class="xs muted" style="margin-top:2px">Damp and mould inspection, treatment and written reports across London. Fixed quotes, 48-hour inspections, Awaab's Law ready.</div></div></div></div>
+      <div class="row" style="gap:8px;margin-top:14px"><button class="btn sm ghost" style="flex:1">Save draft</button><button class="btn sm" style="flex:1">Publish</button></div>
+    </div>
+  </div>`);
+
+S.enquiries = () => D('enquiries', 'Enquiries', 'Every form submission, kept here and pushed into your CRM', `
+  <div class="kpis">${kpi('This month', '68', 'Up from 41 in August')}${kpi('From services pages', '34', 'Damp and electrical lead')}${kpi('From the landing page', '22', 'Out-of-hours desk')}${kpi('Average reply time', '38 min', 'Target 1 hour')}${kpi('Failed to CRM', '0', 'Last 30 days')}</div>
+  <div class="tbl" style="margin-top:14px"><table><thead><tr><th>Received</th><th>Name</th><th>Type</th><th>Page</th><th>What they need</th><th>CRM</th></tr></thead><tbody>
+    ${[['09:12 today', 'J. Whitfield, Kirkland', 'Letting agent', 'Damp and mould', 'Damp patch, SE15, tenant reported', 'ok'],
+       ['08:40 today', 'M. Osei', 'Homeowner', 'Electrical', 'Consumer unit replacement quote', 'ok'],
+       ['Yesterday 17:55', 'Bradleys (portfolio)', 'Letting agent', 'Out-of-hours desk', '340 properties, desk pricing', 'ok'],
+       ['Yesterday 14:02', 'S. Kaur', 'Landlord', 'Gas and heating', 'Landlord gas safety record, 2 flats', 'ok'],
+       ['Mon 11:20', 'Goodchild', 'Letting agent', 'For letting agents', 'Wants to discuss fully managed', 'ok']].map((r) =>
+      `<tr><td class="xs muted">${r[0]}</td><td class="b">${r[1]}</td><td>${sp(r[2] === 'Homeowner' ? 'info' : 'acc', r[2])}</td><td>${r[3]}</td><td class="sm2">${r[4]}</td>
+       <td>${sp('ok', ic('check', 11) + ' Synced')}</td></tr>`).join('')}
+  </tbody></table></div>
+  <div class="g2" style="margin-top:14px">
+    <div class="panel"><div class="in row" style="gap:12px">${ic('refresh', 20)}<div class="sm2"><span class="b">Forms post straight into your CRM.</span> <span class="muted">A copy is kept here, so an enquiry is never lost if the CRM is down.</span></div></div></div>
+    <div class="panel"><div class="in row" style="gap:12px">${ic('bell', 20)}<div class="sm2"><span class="b">Instant alerts.</span> <span class="muted">Email and WhatsApp to whoever is on duty, with the page the enquiry came from.</span></div></div></div>
+  </div>`);
+
+S.tracking = () => D('tracking', 'Traffic and conversions', 'What the analytics show, in plain language', `
+  <div class="kpis">${kpi('Visitors, 30 days', '2 140', 'Up 62 % on last month')}${kpi('Enquiries', '68', '3.2 % of visitors')}${kpi('Calls from the site', '41', 'Tracked tap-to-call')}${kpi('Best page', 'Damp and mould', '11 enquiries')}${kpi('Mobile', '71 %', 'Of all visits')}</div>
+  <div class="g2" style="margin-top:14px">
+    <div class="panel"><h3>Where enquiries come from</h3><div class="in">
+      ${[['Google search', 31, 82], ['Out-of-hours landing page', 22, 58], ['Direct and referrals', 9, 24], ['Partner agent websites', 6, 16]].map(([l, n, w]) =>
+        `<div style="margin-bottom:11px"><div class="row sb sm2"><span>${l}</span><span class="b">${n}</span></div>
+        <div style="height:8px;background:#EEF0F3;border-radius:4px;margin-top:4px"><div style="width:${w}%;height:100%;background:var(--acc);border-radius:4px"></div></div></div>`).join('')}
+      <div class="xs muted">Set up with GA4, Google Tag Manager and call tracking, so your SEO specialist has the data they need from day one.</div></div></div>
+    <div class="panel"><h3>Searches bringing people in</h3><div class="in">
+      ${[['damp and mould specialist london', '186'], ['property maintenance letting agents london', '141'], ['out of hours maintenance desk', '96'], ['emergency electrician se15', '74'], ['fire door inspection london', '58']].map(([q, n]) =>
+        `<div class="row sb" style="padding:7px 0;border-bottom:1px solid #F1F3F5"><span class="sm2">${q}</span><span class="sm2 b">${n}</span></div>`).join('')}</div></div>
+  </div>`);
+
+const order = ['pages', 'editor', 'enquiries', 'tracking'];
+const only = screenFromUrl(null);
+document.getElementById('app').innerHTML = (only && S[only] ? [only] : order).map((k) => S[k]()).join('');
+wireNav({});
+</script>
+</body>
+</html>

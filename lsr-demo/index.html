@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LSR Services Group: proposed website | Demonstration by Sihle Tsheleza</title>
+<meta name="description" content="A working demonstration of a rebuilt website for LSR Services Group: home, service, sector and landing pages, mobile views and the content admin.">
+<meta property="og:title" content="LSR Services Group: proposed website">
+<meta property="og:description" content="A working demonstration of a rebuilt website for LSR Services Group, built for the website designer and developer application.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#102654;--ink2:#2B3E66;--muted:#6B7280;--line:#E5E7EB;--acc:#E09921;--accD:#A06B10;--accL:#FDF3E2}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:#F4F6FA;line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+header{background:var(--ink);color:#fff;padding:34px 0 40px}
+header img{height:38px}
+.tag{display:inline-block;background:var(--acc);color:var(--ink);font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:5px;margin-top:22px}
+h1{font-size:34px;font-weight:800;letter-spacing:-.025em;margin-top:14px;line-height:1.15}
+header p{opacity:.82;max-width:680px;margin-top:12px;font-size:16px}
+.by{margin-top:20px;font-size:14px;opacity:.75}
+.by b{color:#fff}
+h2{font-size:19px;font-weight:700;margin:34px 0 4px}
+h2 span{font-size:13px;font-weight:400;color:var(--muted);margin-left:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:13px;margin-top:14px}
+a.card{background:#fff;border:1px solid var(--line);border-radius:11px;padding:14px 16px;text-decoration:none;color:inherit;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;font-weight:600;transition:.15s}
+a.card:hover{border-color:var(--acc);box-shadow:0 5px 16px rgba(16,38,84,.1);transform:translateY(-1px)}
+a.card small{color:var(--muted);font-weight:400}
+.note{background:#fff;border-left:4px solid var(--acc);border-radius:10px;padding:17px 20px;margin-top:28px;font-size:14px;color:var(--muted)}
+.note b{color:var(--ink)}
+footer{padding:36px 0 60px;color:var(--muted);font-size:13px}
+@media (max-width:600px){.wrap{padding:0 16px}h1{font-size:26px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <img src="assets/logo-white.png" alt="LSR Services Group">
+  <div class="tag">Demonstration, not the live site</div>
+  <h1>LSR Services Group: the website as I would rebuild it</h1>
+  <p>Seven pages, the mobile views and the content admin, built with your logo, your navy and amber, your partner logos and your own photographs. Click any page below. The yellow strip at the top of each one explains what that page is for.</p>
+  <div class="by">Built for the Website Designer &amp; Developer application by <b>Sihle Tsheleza</b> &middot; tshelezas@gmail.com</div>
+</div></header>
+<div class="wrap" id="body"></div>
+<footer><div class="wrap">This is a demonstration built for an application, and is not affiliated with or published by LSR Services Group. Logo, partner logos and photographs remain the property of LSR Services Group.</div></footer>
+<script>
+const groups = [
+ ['The website', 'opens at desktop size', 'site.html', [['home','Home page'],['services','All services'],['service','Service page: damp &amp; mould'],['sectors','Sector page: letting agents'],['landing','Campaign landing page'],['work','Completed works &amp; accreditations'],['contact','Contact']]],
+ ['On a phone', 'the mobile experience', 'mobile.html', [['home','Home, with fixed call button'],['form','The enquiry form']]],
+ ['The content admin', 'how your team would edit the site', 'admin.html', [['pages','Pages &amp; search settings'],['editor','Editing a page, with live preview'],['enquiries','Enquiries, synced to your CRM'],['tracking','Traffic &amp; conversions']]],
+];
+document.getElementById('body').innerHTML = groups.map(([name, hint, file, items]) => `
+<h2>${name}<span>${hint}</span></h2>
+<div class="grid">${items.map(([s, label]) => `<a class="card" href="${file}?s=${s}">${label} <small>&rsaquo;</small></a>`).join('')}</div>`).join('')
++ `<div class="note"><b>A note on the content.</b> The logo, partner logos, photographs, phone number, email address, office address and company number are LSR's own, taken from lsrservicesgroup.co.uk. Everything else is placeholder content: case studies, locations, durations, enquiry names, visitor numbers and search terms. The accreditation panels are deliberately left empty until real certificates are supplied. <b>The full written proposal, including the assessment of the current site, the fee and the timeframe, is in the PDF.</b></div>`;
+</script>
+</body>
+</html>

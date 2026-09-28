@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LSR Services Group: proposed website | Demonstration</title>
+<meta name="description" content="A working demonstration of the rebuilt LSR Services Group website: home, service, sector, landing, completed works and contact pages.">
+<meta property="og:title" content="LSR Services Group: proposed website | Demonstration">
+<meta property="og:description" content="A working demonstration of the rebuilt LSR Services Group website: home, service, sector, landing, completed works and contact pages.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="kit.js"></script>
+<style>
+body{padding:30px 0 60px}
+.site{background:#fff}
+.util{background:var(--ink);color:rgba(255,255,255,.85);font-size:12.5px;padding:8px 48px;display:flex;gap:20px;align-items:center}
+.util b{color:#fff}
+.hd{display:flex;align-items:center;gap:26px;padding:14px 48px;border-bottom:1px solid var(--line);background:#fff}
+.hd img{height:34px}
+.hd nav{display:flex;gap:22px;flex:1;justify-content:center;font-size:14px;font-weight:600}
+.hd nav span.on{color:var(--accD)}
+.btn2{display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:var(--ink);padding:12px 20px;border-radius:8px;font-weight:700;font-size:14.5px}
+.btn2.navy{background:var(--ink);color:#fff}
+.btn2.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45);font-weight:600}
+.sec{padding:56px 48px}.sec.gray{background:#F4F6FA}.sec.navy{background:var(--ink);color:#fff}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+h1.hh{font-size:44px;line-height:1.08;font-weight:800;letter-spacing:-.03em;margin-top:10px}
+h2.sh{font-size:29px;line-height:1.18;font-weight:800;letter-spacing:-.02em}
+.lede{font-size:16.5px;line-height:1.6;margin-top:12px;max-width:540px}
+.hero{position:relative;min-height:470px;color:#fff;overflow:hidden;display:flex;align-items:center}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .sh{position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,38,84,.95) 0%,rgba(16,38,84,.86) 42%,rgba(16,38,84,.35) 100%)}
+.hero .in{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;padding:46px 48px;width:100%;align-items:center}
+.form{background:#fff;color:var(--ink);border-radius:14px;padding:22px;box-shadow:0 18px 40px rgba(0,0,0,.28)}
+.form .fld{margin-top:6px;border-radius:8px;padding:9px 11px}
+.form .lab{margin-top:11px}
+.trust{display:flex;gap:26px;flex-wrap:wrap;align-items:center;padding:16px 48px;background:#fff;border-bottom:1px solid var(--line)}
+.trust img{height:30px;opacity:.75;filter:grayscale(1)}
+.card2{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px}
+.card2 h3{font-size:16.5px;font-weight:700;margin-top:10px}
+.card2 p{font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.5}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--accL);color:var(--accD);border-radius:6px;padding:4px 9px;font-size:11.5px;font-weight:700}
+.ft{background:var(--ink);color:rgba(255,255,255,.72);padding:40px 48px 24px;font-size:13.5px}
+.ft h4{color:#fff;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:11px}
+.ft a{display:block;color:rgba(255,255,255,.72);margin-bottom:7px}
+.note{background:#FFF6CC;border-bottom:1px solid #E9D36A;color:#4D3F00;font-size:12.5px;padding:10px 48px;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
+.note b{margin-right:4px}.note span{display:inline-flex;gap:6px;align-items:center}
+.stat{text-align:center}.stat .n{font-size:30px;font-weight:800;color:var(--acc)}.stat .l{font-size:12.5px;opacity:.75;margin-top:2px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const NAV = [['home', 'Home'], ['services', 'Services'], ['sectors', 'Sectors'], ['work', 'Our Work'], ['about', 'About'], ['contact', 'Contact']];
+const LOGO_W = 'assets/logo-white.png', LOGO_N = 'assets/logo-navy.png';
+const PARTNERS = ['kirkland', 'olive', 'bradleys', 'goodchild', 'sjm'];
+const SERVICES = [
+  ['wrench2', 'Reactive Repairs', 'Same-day and next-day response for leaks, breakdowns and tenant-reported faults, logged and tracked to completion.'],
+  ['plug', 'Electrical', 'EICRs, fault finding, upgrades, remedial works and emergency callouts by qualified electricians.'],
+  ['flame2', 'Gas &amp; Heating', 'Gas Safe engineers for boiler repairs, servicing, landlord gas safety records and full system installs.'],
+  ['droplet2', 'Damp &amp; Mould', 'Awaab\'s Law-ready inspections, cause diagnosis, treatment and written reports with photographs.'],
+  ['door', 'Fire Doors', 'FD30 and FD60 inspection, remedial works and replacement, with certification for your compliance file.'],
+  ['home', 'Multi-Trade Works', 'Handyman, painting and decorating, carpentry, plastering and end-of-tenancy turnarounds.'],
+  ['gauge', 'HVAC', 'Air conditioning and ventilation servicing, repairs and installation across managed portfolios.'],
+  ['clipboard', 'Property Assessments', 'Pre-tenancy, mid-term and void inspections with photographed condition reports.'],
+  ['cal', 'Planned Works', 'Scheduled maintenance programmes, refurbishments and cyclical redecoration, priced up front.'],
+];
+const util = () => `<div class="util">${ic('phone', 13)} <b>020 8073 0151</b><span>${ic('mail', 13)} info@lsrservicesgroup.co.uk</span><span style="flex:1"></span>
+  <span>${ic('clock', 13)} 24/7 maintenance desk</span><span>${ic('pin', 13)} Greater London &middot; UK-wide desk support</span></div>`;
+const header = (on) => `${util()}<div class="hd"><img src="${LOGO_N}" alt="LSR Services Group" data-nav="home">
+  <nav>${NAV.map(([id, l]) => `<span class="${on === id ? 'on' : ''}" data-nav="${id}">${l}</span>`).join('')}</nav>
+  <span class="btn2" data-nav="contact">Get a fixed quote</span></div>`;
+const trust = () => `<div class="trust"><span class="xs b" style="color:var(--muted);letter-spacing:.06em">TRUSTED BY LETTING AGENTS</span>
+  ${PARTNERS.map((p) => `<img src="assets/partner-${p}.png" alt="">`).join('')}</div>`;
+const footer = () => `<div class="ft"><div style="display:grid;grid-template-columns:1.3fr 1fr 1fr 1.1fr;gap:36px">
+  <div><img src="${LOGO_W}" style="height:34px" alt=""><p style="margin-top:12px;max-width:290px">Fully managed property maintenance for letting agents, landlords and homeowners across Greater London.</p>
+    <div style="margin-top:12px;display:flex;gap:10px">${['shield', 'flame2', 'plug'].map((i) => `<span style="background:rgba(255,255,255,.1);border-radius:6px;padding:7px 9px">${ic(i, 15)}</span>`).join('')}</div></div>
+  <div><h4>Services</h4>${['Reactive repairs', 'Electrical', 'Gas &amp; heating', 'Damp &amp; mould', 'Fire doors', 'Planned works'].map((s) => `<a data-nav="services">${s}</a>`).join('')}</div>
+  <div><h4>Sectors</h4>${['Letting agents', 'Landlords', 'Block management', 'Housing associations', 'Homeowners'].map((s) => `<a data-nav="sectors">${s}</a>`).join('')}</div>
+  <div><h4>Contact</h4><a>020 8073 0151</a><a>info@lsrservicesgroup.co.uk</a><a>20 Wenlock Road, London N1 7GU</a><a>Company no. 16937050</a></div></div>
+  <div style="border-top:1px solid rgba(255,255,255,.12);margin-top:26px;padding-top:14px;display:flex;justify-content:space-between;font-size:12.5px">
+  <span>&copy; 2026 LSR Services Group</span><span>Privacy policy &middot; Terms &middot; Complaints procedure</span></div></div>`;
+const page = (slug, on, body, notes, noNav) => `<div class="desk"><div class="browser"><i></i><i></i><i></i><div class="url">${ic('lock', 11)} lsrservicesgroup.co.uk/${slug}</div></div>
+  ${notes ? `<div class="note"><b>What this page does</b>${notes.map((t) => `<span>${ic('check', 12)} ${t}</span>`).join('')}</div>` : ''}
+  <div class="site">${noNav ? '' : header(on)}${body}${footer()}</div></div>`;
+const quoteForm = (title = 'Get a fixed quote', sub = 'We reply within 1 working hour, 8am to 6pm.') => `<div class="form">
+  <div style="font-size:19px;font-weight:800;letter-spacing:-.02em">${title}</div><div class="xs muted" style="margin-top:3px">${sub}</div>
+  <div class="lab">I am a</div><div style="display:flex;gap:6px;margin-top:6px">${['Letting agent', 'Landlord', 'Homeowner'].map((t, i) => `<span class="pill ${i === 0 ? 'acc' : 'mut'}" style="flex:1;justify-content:center;padding:8px;font-size:11.5px">${t}</span>`).join('')}</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    <div><div class="lab">Name</div><div class="fld"><div class="v sm2">J. Whitfield</div></div></div>
+    <div><div class="lab">Phone</div><div class="fld"><div class="v sm2">07700 900 118</div></div></div></div>
+  <div class="lab">Email</div><div class="fld"><div class="v sm2">j.whitfield@kirkland.example</div></div>
+  <div class="lab">Property postcode</div><div class="fld"><div class="v sm2">SE15 4TQ</div></div>
+  <div class="lab">What needs doing?</div><div class="fld"><div class="v sm2">Damp patch in first-floor bedroom, tenant reported</div></div>
+  <div class="row" style="gap:8px;margin-top:10px"><span style="width:16px;height:16px;border-radius:4px;border:1.5px solid var(--acc);background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center">${ic('check', 11)}</span>
+    <span class="xs muted">Send me a fixed quote before any work starts</span></div>
+  <span class="btn2" style="width:100%;justify-content:center;margin-top:12px">Send enquiry ${ic('arrow', 15)}</span>
+  <div class="xs muted" style="text-align:center;margin-top:8px">Or call <b>020 8073 0151</b> &middot; 24/7 for emergencies</div></div>`;
+
+const S = {};
+
+S.home = () => page('', 'home', `
+  <div class="hero"><img class="bg" src="assets/team-agent.jpg" alt=""><div class="sh"></div>
+    <div class="in"><div>
+      <div class="eyebrow">Property maintenance, fully managed</div>
+      <h1 class="hh">Maintenance handled end to end, without the admin</h1>
+      <p class="lede" style="opacity:.9">Reactive repairs, compliance and planned works for letting agents, landlords and homeowners across Greater London. We take the tenant calls, triage the job, send the trade and close it out, with fixed quotes before any work starts.</p>
+      <div style="display:flex;gap:22px;margin-top:24px">${[['24/7', 'Call handling'], ['1 hr', 'Quote response'], ['Fixed', 'Prices, not hourly']].map(([n, l]) => `<div class="stat" style="text-align:left"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('')}</div>
+      <div style="display:flex;gap:12px;margin-top:24px"><span class="btn2" data-nav="services">Our services</span><span class="btn2 ghost" data-nav="work">See completed works</span></div>
+    </div>${quoteForm()}</div></div>
+  ${trust()}
+  <div class="sec"><div class="row sb" style="align-items:flex-end"><div><div class="eyebrow">What we do</div><h2 class="sh" style="margin-top:8px">Every trade, one point of contact</h2></div>
+    <span class="xs b" style="color:var(--accD)" data-nav="services">All services ${ic('arrow', 12)}</span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px">
+      ${SERVICES.slice(0, 6).map(([i, t, d]) => `<div class="card2" data-nav="services"><span class="pill acc" style="padding:9px">${ic(i, 19)}</span><h3>${t}</h3><p>${d}</p>
+        <div class="xs b" style="color:var(--accD);margin-top:10px">Learn more ${ic('arrow', 12)}</div></div>`).join('')}</div></div>
+  <div class="sec navy"><div style="display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center">
+    <div><div class="eyebrow">Two ways to work with us</div><h2 class="sh" style="margin-top:8px">London fully managed, or the out-of-hours desk</h2>
+      <p class="lede" style="opacity:.85">In London we coordinate everything end to end and you pay actual trade costs only. Outside London our 24/7 desk takes tenant calls and triages jobs to your existing contractors.</p>
+      <div style="display:flex;gap:12px;margin-top:22px"><span class="btn2" data-nav="sectors">For letting agents</span><span class="btn2 ghost" data-nav="landing">Out-of-hours desk</span></div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      ${[['Tenant calls answered', 'In under 60 seconds'], ['Jobs triaged and quoted', 'Same working day'], ['Contractor dispatched', 'Tracked to completion'], ['Job closed and reported', 'With photographs']].map(([t, d]) =>
+        `<div style="background:rgba(255,255,255,.07);border-radius:10px;padding:16px"><div style="color:var(--acc)">${ic('check', 18)}</div><div class="sm2 b" style="margin-top:7px">${t}</div><div class="xs" style="opacity:.7">${d}</div></div>`).join('')}</div></div></div>
+  <div class="sec gray"><div class="row sb" style="align-items:flex-end"><div><div class="eyebrow">Recent work</div><h2 class="sh" style="margin-top:8px">Jobs we have completed</h2></div>
+    <span class="xs b" style="color:var(--accD)" data-nav="work">All case studies ${ic('arrow', 12)}</span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px">
+      ${[['decorator.jpg', 'End-of-tenancy turnaround', 'Peckham, SE15', 'Full redecoration and repairs in 4 days, ready for re-let'],
+         ['engineer.jpg', 'Emergency boiler replacement', 'Islington, N1', 'Tenant without heating, diagnosed and replaced within 24 hours'],
+         ['handover.jpg', 'Damp and mould investigation', 'Croydon, CR0', 'Cause traced, treated and reported for the landlord\'s file']].map(([img, t, loc, d]) =>
+        `<div class="card2" style="padding:0;overflow:hidden" data-nav="work"><img src="assets/${img}" style="width:100%;height:160px;object-fit:cover;display:block" alt="">
+          <div style="padding:16px"><span class="badge">${loc}</span><h3>${t}</h3><p>${d}</p></div></div>`).join('')}</div></div>
+  <div class="sec"><div style="display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center">
+    <div class="ph" style="border:2px dashed #C3CBDA;border-radius:14px;background:repeating-linear-gradient(45deg,#F5F7FA 0 14px,#EEF1F6 14px 28px);height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#6B7794;font-weight:600;text-align:center">
+      ${ic('shield', 28)}Accreditation logos go here<span style="font-weight:400;font-size:12px">Gas Safe, NICEIC, CHAS, TrustMark, insurance</span></div>
+    <div><div class="eyebrow">Accreditations</div><h2 class="sh" style="margin-top:8px">Vetted, insured and accountable</h2>
+      <p class="lede" style="color:var(--muted)">Every trade is vetted, insured and reviewed after each job. Certificates and insurance details are available on request, and shown here once you send them through.</p></div></div></div>`,
+  ['Enquiry form above the fold', 'Clickable phone and email', 'Audience split: agent, landlord, homeowner', 'Real partner logos as proof', 'Every service links to its own page']);
+
+S.services = () => page('services', 'services', `
+  <div class="sec navy" style="padding:44px 48px"><div class="eyebrow">Services</div><h2 class="sh" style="margin-top:8px">Every trade we cover</h2>
+    <p class="lede" style="opacity:.85">One contact for reactive repairs, compliance and planned works. Each service has its own page, so it can rank on its own terms.</p></div>
+  <div class="sec"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+    ${SERVICES.map(([i, t, d]) => `<div class="card2" data-nav="service"><span class="pill acc" style="padding:9px">${ic(i, 19)}</span><h3>${t}</h3><p>${d}</p>
+      <div class="xs b" style="color:var(--accD);margin-top:10px">Learn more ${ic('arrow', 12)}</div></div>`).join('')}</div>
+    <div class="card2" style="margin-top:20px;background:var(--accL);border-color:#EDD9AF;display:flex;justify-content:space-between;align-items:center">
+      <div><div class="b" style="font-size:17px">Not sure what you need?</div><div class="sm2 muted">Send the details and we will assess, price and come back with a fixed quote.</div></div>
+      <span class="btn2" data-nav="contact">Get a fixed quote</span></div></div>`,
+  ['Nine service pages instead of one trades list', 'Each one targets its own search terms']);
+
+S.service = () => page('services/damp-and-mould-london', 'services', `
+  <div class="sec navy" style="padding:40px 48px"><div class="xs" style="opacity:.6">Home &rsaquo; Services &rsaquo; Damp and mould</div>
+    <div style="display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;margin-top:12px">
+      <div><h1 class="hh" style="font-size:38px">Damp and mould specialists in London</h1>
+        <p class="lede" style="opacity:.88">Inspection, cause diagnosis, treatment and a written report with photographs, so you can evidence action under Awaab's Law. Landlord, agent and homeowner work across Greater London.</p>
+        <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">${['Inspection within 48 hours', 'Written report with photographs', 'Fixed quote before works'].map((t) => `<span class="pill acc" style="padding:8px 12px">${ic('check', 13)} ${t}</span>`).join('')}</div></div>
+      ${quoteForm('Book a damp inspection', 'Or call 020 8073 0151 for an emergency.')}</div></div>
+  <div class="sec"><div style="display:grid;grid-template-columns:1.25fr .75fr;gap:44px">
+    <div><h2 class="sh">What we do on a damp and mould job</h2>
+      <p class="lede" style="color:var(--muted);max-width:none">Damp is a symptom. We find the cause first, because treating the surface alone means the tenant calls again in three months.</p>
+      ${[['Inspection', 'Moisture readings, thermal check where needed, and photographs of every affected area.'],
+         ['Diagnosis', 'Penetrating damp, rising damp, condensation or a building fault. We tell you which, and why.'],
+         ['Fixed quote', 'Priced works before anything starts, split into what is urgent and what can be planned.'],
+         ['Treatment', 'Cause repaired, affected areas treated, and ventilation improved where condensation is the driver.'],
+         ['Report', 'A written report with before and after photographs for your compliance file or the tenant\'s case.']].map(([t, d], i) =>
+        `<div class="row" style="gap:14px;align-items:flex-start;margin-top:18px"><span class="av" style="background:var(--acc);color:var(--ink);width:30px;height:30px;font-size:13px">${i + 1}</span>
+          <div><div class="b" style="font-size:16px">${t}</div><div class="muted sm2" style="margin-top:2px">${d}</div></div></div>`).join('')}
+      <h2 class="sh" style="margin-top:34px">Common questions</h2>
+      ${[['How quickly can you inspect?', 'Within 48 hours for managed portfolios, and same day for emergencies.'],
+         ['Do you provide reports for Awaab\'s Law?', 'Yes. Every job includes a written report with dated photographs and the actions taken.'],
+         ['Do you work with tenants directly?', 'We handle tenant contact and access arrangements on your behalf.']].map(([q, a]) =>
+        `<div class="card2" style="margin-top:10px"><div class="b sm2">${q}</div><div class="muted sm2" style="margin-top:4px">${a}</div></div>`).join('')}</div>
+    <div>
+      <div class="card2" style="background:var(--ink);color:#fff;border:0"><div class="b" style="font-size:17px">Areas we cover</div>
+        <div class="sm2" style="opacity:.8;margin-top:6px">North, South, East and West London, plus the M25 corridor. Desk support UK wide.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px">${['Islington', 'Hackney', 'Croydon', 'Camden', 'Southwark', 'Barnet'].map((a) => `<span class="pill" style="background:rgba(255,255,255,.12);color:#fff">${a}</span>`).join('')}</div></div>
+      <div class="card2" style="margin-top:14px;padding:0;overflow:hidden"><img src="assets/handover.jpg" style="width:100%;height:170px;object-fit:cover;display:block" alt="">
+        <div style="padding:16px"><span class="badge">Croydon, CR0</span><h3>Damp traced to a failed gutter</h3><p>Tenant reported mould in two rooms. Cause found and repaired, areas treated, report issued in 5 days.</p></div></div>
+      <div class="card2" style="margin-top:14px"><div class="b sm2">Related services</div>
+        ${['Reactive repairs', 'Property assessments', 'Multi-trade works'].map((t) => `<div class="row sb" style="padding:7px 0;border-bottom:1px solid #F1F3F5"><span class="sm2">${t}</span>${ic('chev', 14)}</div>`).join('')}</div></div>
+  </div></div>`,
+  ['One page per service, with its own title and description', 'Form repeated at the top and bottom', 'FAQs marked up for Google', 'Internal links to related services and areas']);
+
+S.sectors = () => page('sectors/letting-agents', 'sectors', `
+  <div class="sec navy" style="padding:40px 48px"><div style="display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center">
+    <div><div class="eyebrow">For letting agents</div><h1 class="hh" style="font-size:38px">Give your property managers their week back</h1>
+      <p class="lede" style="opacity:.88">We become your maintenance department: tenant calls, triage, contractors, follow-ups and reporting. You approve, we do the rest.</p></div>
+    ${quoteForm('Book a 15-minute call', 'See how it would work across your portfolio.')}</div></div>
+  <div class="sec"><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+    ${[['clock', 'Hours back each week', 'No more chasing contractors or fielding tenant calls'], ['users', 'One point of contact', 'A named coordinator who knows your portfolio'],
+       ['invoice', 'No management fees', 'In London you pay actual trade costs only'], ['chart', 'Clear reporting', 'Every job logged, photographed and closed out']].map(([i, t, d]) =>
+      `<div class="card2"><span class="pill acc" style="padding:9px">${ic(i, 18)}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;align-items:center">
+      <img src="assets/manager.jpg" style="width:100%;height:300px;object-fit:cover;border-radius:12px" alt="">
+      <div><h2 class="sh">Built for the way agents work</h2>
+        ${['Tenant reports a fault to us directly, or you forward it', 'We triage, arrange access and send the right trade', 'Fixed quote to you for anything above your approval limit', 'Job completed, photographed and closed on the same system', 'Monthly report by property, so you can show the landlord'].map((t) =>
+          `<div class="row" style="gap:10px;margin-top:11px;font-size:15px"><span style="color:var(--acc)">${ic('check', 17)}</span>${t}</div>`).join('')}
+        <div style="margin-top:20px"><span class="btn2 navy" data-nav="contact">Talk to us about your portfolio</span></div></div></div></div>
+  <div class="sec gray"><div class="eyebrow">Other sectors</div><h2 class="sh" style="margin-top:8px">We also work with</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px">
+      ${[['Landlords', 'One property or fifty, managed without the phone calls'], ['Block management', 'Communal repairs, compliance and planned works'],
+         ['Housing associations', 'Responsive repairs with reporting and audit trails'], ['Homeowners', 'Fixed-price repairs and improvements, vetted trades']].map(([t, d]) =>
+        `<div class="card2"><h3 style="margin-top:0">${t}</h3><p>${d}</p><div class="xs b" style="color:var(--accD);margin-top:10px">Learn more ${ic('arrow', 12)}</div></div>`).join('')}</div></div>`,
+  ['A page per sector, including homeowners (B2C)', 'Speaks to one audience at a time', 'Its own enquiry form and call to action']);
+
+S.landing = () => page('out-of-hours-maintenance-desk', '', `
+  <div class="util" style="justify-content:space-between"><span>${ic('phone', 13)} <b>020 8073 0151</b></span><span>24/7 staffed desk &middot; UK wide</span></div>
+  <div class="hero" style="min-height:430px"><img class="bg" src="assets/handover.jpg" alt=""><div class="sh"></div>
+    <div class="in"><div><img src="${LOGO_W}" style="height:32px" alt="">
+      <h1 class="hh" style="margin-top:20px">Your out-of-hours maintenance desk, staffed 24/7</h1>
+      <p class="lede" style="opacity:.9">Stop taking tenant calls at 11pm. We answer, triage and dispatch to your existing contractors, then hand you a clean report in the morning. No change to your supply chain.</p>
+      <div style="display:flex;gap:22px;margin-top:22px">${[['60 sec', 'Average answer time'], ['Your', 'Contractors, not ours'], ['From £0', 'Management fees in London']].map(([n, l]) => `<div class="stat" style="text-align:left"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('')}</div>
+    </div>${quoteForm('Get desk pricing', 'One page, no obligation. We reply the same working day.')}</div></div>
+  <div class="sec"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+    ${[['phone', 'We answer', 'Tenant calls picked up in under a minute, day or night, by a trained UK desk.'],
+       ['clipboard', 'We triage', 'Real questions, not a message-taking service. Emergencies escalated, the rest scheduled.'],
+       ['send', 'We dispatch', 'Your contractors, your rates, called out and followed up until the job is closed.']].map(([i, t, d]) =>
+      `<div class="card2"><span class="pill acc" style="padding:9px">${ic(i, 19)}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>
+    <div class="card2" style="margin-top:22px;display:flex;justify-content:space-between;align-items:center;background:var(--ink);color:#fff;border:0">
+      <div><div class="b" style="font-size:18px">See what a month of out-of-hours cover would cost</div><div class="sm2" style="opacity:.75">Tell us your portfolio size and we will price it today.</div></div>
+      <span class="btn2">Get desk pricing</span></div></div>`,
+  ['A landing page with no navigation, so the only action is the form', 'Made for paid ads and email campaigns', 'One offer, repeated calls to action'], true);
+
+S.work = () => page('our-work', 'work', `
+  <div class="sec navy" style="padding:40px 48px"><div class="eyebrow">Our work</div><h2 class="sh" style="margin-top:8px">Completed works and accreditations</h2>
+    <p class="lede" style="opacity:.85">Real jobs, photographed before and after, with what was found and how it was resolved.</p></div>
+  <div class="sec"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+    ${[['decorator.jpg', 'End-of-tenancy turnaround', 'Peckham, SE15', '4 days', 'Full redecoration, minor repairs and a deep clean between tenancies, ready for viewings on the Friday.'],
+       ['engineer.jpg', 'Emergency boiler replacement', 'Islington, N1', '24 hours', 'Tenant without heating on a Friday night. Diagnosed, parts sourced and replaced by Saturday afternoon.'],
+       ['handover.jpg', 'Damp and mould investigation', 'Croydon, CR0', '5 days', 'Mould in two rooms traced to a failed gutter. Cause repaired, areas treated, written report issued.'],
+       ['engineer.jpg', 'EICR remedial works', 'Hackney, E8', '2 days', 'Unsatisfactory EICR on a three-bed flat. C1 and C2 items resolved and certificate reissued.'],
+       ['decorator.jpg', 'Communal redecoration', 'Barnet, N12', '3 weeks', 'Hallways and stairwells across two blocks, phased so residents kept access throughout.'],
+       ['handover.jpg', 'Fire door replacement', 'Southwark, SE1', '1 week', 'Twelve FD30 doors inspected, four replaced, all certified for the block compliance file.']].map(([img, t, loc, dur, d]) =>
+      `<div class="card2" style="padding:0;overflow:hidden"><img src="assets/${img}" style="width:100%;height:150px;object-fit:cover;display:block" alt="">
+        <div style="padding:16px"><div class="row" style="gap:6px"><span class="badge">${loc}</span><span class="badge" style="background:#EEF1F6;color:var(--ink3)">${dur}</span></div>
+        <h3>${t}</h3><p>${d}</p></div></div>`).join('')}</div></div>
+  <div class="sec gray"><div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+    <div><div class="eyebrow">Accreditations</div><h2 class="sh" style="margin-top:8px">The paperwork behind the work</h2>
+      <p class="lede" style="color:var(--muted)">Send us your certificates and they appear here with their renewal dates, kept current from the admin so nothing expires on the site.</p></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      ${['Gas Safe', 'NICEIC', 'CHAS', 'TrustMark', 'Public liability', 'DBS checked'].map((t) =>
+        `<div style="border:2px dashed #C3CBDA;border-radius:12px;background:#fff;height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#6B7794;font-size:12.5px;font-weight:600">${ic('shield', 20)}${t}</div>`).join('')}</div></div></div>`,
+  ['Case studies with location, duration and outcome', 'Accreditation slots ready for your certificates', 'Proof that a quote page cannot give']);
+
+S.contact = () => page('contact', 'contact', `
+  <div class="sec gray"><div style="display:grid;grid-template-columns:1fr 1fr;gap:48px">
+    <div><div class="eyebrow">Contact</div><h2 class="sh" style="margin-top:8px">Tell us what needs doing</h2>
+      <p class="lede" style="color:var(--muted)">Send the details and we will assess, price it and come back with a fixed quote. Emergencies are answered 24 hours a day.</p>
+      ${[['phone', 'Call', '020 8073 0151', 'Tap to call, 24/7 for emergencies'], ['mail', 'Email', 'info@lsrservicesgroup.co.uk', 'Replies within 1 working hour'],
+         ['pin', 'Office', '20 Wenlock Road, London N1 7GU', 'Company no. 16937050'], ['clock', 'Hours', 'Office 8am to 6pm', 'Maintenance desk 24/7']].map(([i, t, v, d]) =>
+        `<div class="row" style="gap:14px;margin-top:18px;align-items:flex-start"><span class="pill acc" style="padding:9px">${ic(i, 18)}</span>
+          <div><div class="b">${t}</div><div class="sm2">${v}</div><div class="xs muted">${d}</div></div></div>`).join('')}
+      <div class="card2" style="margin-top:22px;background:var(--ink);color:#fff;border:0"><div class="b">Existing client with an emergency?</div>
+        <div class="sm2" style="opacity:.8;margin-top:3px">Call the desk on 020 8073 0151 and quote your agency name. We answer 24 hours.</div></div></div>
+    ${quoteForm('Send an enquiry', 'Every enquiry goes straight into our CRM, so nothing is missed.')}</div></div>`,
+  ['A form that actually exists', 'Goes straight into the CRM', 'Tap-to-call and tap-to-email on mobile']);
+
+const order = ['home', 'services', 'service', 'sectors', 'landing', 'work', 'contact'];
+const only = screenFromUrl(null);
+document.getElementById('app').innerHTML = (only && S[only] ? [only] : order).map((k) => S[k]()).join('');
+wireNav({});
+</script>
+</body>
+</html>
